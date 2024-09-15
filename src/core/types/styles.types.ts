@@ -36,3 +36,7 @@ export interface ColorsType {
     CARDSHADOW: string;
   }
   
+
+  export interface ButtonStyleType{
+    dormant?:boolean
+  }
