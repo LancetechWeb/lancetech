@@ -1,9 +1,14 @@
-import { Box } from '@mui/material'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+// import Footer from '../components/Footer/Footer';
 
 const Footer = () => {
   return (
-    <Box>Footer</Box>
-  )
-}
+    <div style={{}}>
+      <Outlet />
+      {/* <Footer /> */}
+    </div>
+  );
+};
 
-export default Footer
+export default Footer;

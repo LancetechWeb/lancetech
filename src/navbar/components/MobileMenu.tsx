@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, DialogContent, Dialog, Icon, IconButton, Slide, Button } from '@mui/material';
+import { Box, DialogContent, Dialog, Icon, IconButton, Slide } from '@mui/material';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { setOpenMenu } from '../../core/reducers/uiSlice';
 import { COLORS } from '../../core/styles/COLORS';
 import { RootState } from '../../store';
 import { TransitionProps } from '@mui/material/transitions';
+import Button from '../../core/styles/Button';
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {

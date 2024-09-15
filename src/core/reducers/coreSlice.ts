@@ -1,6 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CoreStateType } from '../types/core.state.types';
 
-const initialState = {
+const initialState:CoreStateType = {
   previousPage: '/',
 };
 
@@ -9,7 +10,7 @@ const Core = createSlice({
   initialState,
   reducers: {
     notification(state, action) {},
-    setPreviousPage: (state, action) => {
+    setPreviousPage: (state, action:PayloadAction<string>) => {
       state.previousPage = action.payload;
     },
   },
