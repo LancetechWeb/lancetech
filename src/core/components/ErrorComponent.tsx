@@ -1,23 +1,15 @@
 import { Box, Typography } from '@mui/material'
-import React from 'react'
-import { COLORS } from '../styles/COLORS'
 import Button from '../styles/Button'
 import { useNavigate } from 'react-router-dom'
 import sleepy_bear from '../../assets/sleepy_bear.png'
+import { ErrorStyle } from '../styles/ErrorStyle'
 
 const ErrorComponent = () => {
     const navigate = useNavigate()
 
   return (
-   <Box sx={{
-        display:"flex", 
-        alignItems:"center", 
-        gap:10, 
-        width:"100%", 
-        background:COLORS.LightGrey,
-        py:25
-   }}>
-    <Box sx={{width:"50%", display:"flex", justifyContent:"end"}}>
+   <ErrorStyle >
+    <Box className="errorImage">
         <img src={sleepy_bear} alt="sleepy_bear"/>
     </Box>
     <Box sx={{width:"50%"}}>
@@ -25,7 +17,7 @@ const ErrorComponent = () => {
         <Typography sx={{py:2}}>You must have navigated to the wrong link. </Typography>
         <Button onClick={()=>navigate("/home")}>BACK TO HOME</Button>
     </Box>
-   </Box>
+   </ErrorStyle>
   )
 }
 
