@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { setScrollIcon } from '../reducers/uiSlice';
 import NavBar from '../../navbar/components/NavBar';
 import MobileMenu from '../../navbar/components/MobileMenu';
-import { setPreviousPage } from '../reducers/coreSlice';
 
 const MenuPagesWrapper = () => {
   const [navfixed, setNavfixed] = useState<boolean>(false);
