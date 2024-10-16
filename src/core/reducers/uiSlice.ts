@@ -5,7 +5,7 @@ const initialState = {
   openMenu: false,
 };
 
-const UI = createSlice({
+const uiSlice = createSlice({
   name: 'UI_SLICE',
   initialState,
   reducers: {
@@ -20,5 +20,5 @@ const UI = createSlice({
   },
 });
 
-export const { setScrollIcon, setOpenMenu } = UI.actions;
-export const uIReducer = UI.reducer;
+export const { setScrollIcon, setOpenMenu } = uiSlice.actions;
+export const uIReducer = uiSlice.reducer;

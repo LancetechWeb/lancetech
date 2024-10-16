@@ -1,7 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setPreviousPage } from "../../core/reducers/coreSlice";
 import TorusImage from '../../assets/Torus.svg';
 import { AboutStyle } from "../styles/AboutStyle";
 import Button from "../../core/styles/Button";
@@ -12,9 +9,6 @@ import OurTeams from "./ourTeams/OurTeams";
 
 const About = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  useEffect(() => () => {dispatch(setPreviousPage('/about'))});
 
   const handleNavigate = () => {
     navigate('/roles');

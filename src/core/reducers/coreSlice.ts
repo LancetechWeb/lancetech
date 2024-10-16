@@ -3,9 +3,10 @@ import { CoreStateType } from '../types/core.state.types';
 
 const initialState:CoreStateType = {
   previousPage: '/',
+  isAuthenticated:false
 };
 
-const Core = createSlice({
+const coreSlice = createSlice({
   name: 'CORE_SLICE',
   initialState,
   reducers: {
@@ -13,8 +14,14 @@ const Core = createSlice({
     setPreviousPage: (state, action:PayloadAction<string>) => {
       state.previousPage = action.payload;
     },
+    setIsAuthenticated: (state, action:PayloadAction<boolean>) => {
+      console.log('dispatching isAuthenticated...');
+
+
+      state.isAuthenticated = action.payload;
+    },
   },
 });
 
-export const { setPreviousPage } = Core.actions;
-export const coreReducer = Core.reducer;
+export const { setPreviousPage, setIsAuthenticated } = coreSlice.actions;
+export const coreReducer = coreSlice.reducer;

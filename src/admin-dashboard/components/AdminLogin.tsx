@@ -2,14 +2,17 @@ import { Box, Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import useIinitialAuthCheck from '../../core/hooks/useAuthCheck'
 import { textFieldStyles } from '../../core/styles/textField.styles'
 import { COLORS } from '../../core/styles/COLORS'
+import { useDispatch } from 'react-redux'
+import { setIsAuthenticated } from '../../core/reducers/coreSlice'
 
 const AdminLogin = () => {
   const navigate = useNavigate()
   const { DarkBlue3 } = COLORS;
+  const dispatch = useDispatch()
 
+  // local state
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -40,8 +43,10 @@ const AdminLogin = () => {
         );
 
         console.log("response", response);
-
-        navigate('/posts')
+        if(response.status === 200){
+          dispatch(setIsAuthenticated(true))
+          //  navigate('/admin/dashboard')
+        }
 
         // setData(response.data)
       } catch (error) {
@@ -51,15 +56,12 @@ const AdminLogin = () => {
 
 
 
-    // hoooks
-  useIinitialAuthCheck()
-
     
   return (
     <Box 
         sx={{
             width:"100vw", 
-            height:"100vh", 
+            height:"70vh", 
             display:"flex", 
             flexDirection:"column", 
             alignItems:"center", 

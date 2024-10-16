@@ -1,3 +1,3 @@
 export interface NavStyleProps {
-    navFixed: boolean;
+  $navfixed: boolean;
   }

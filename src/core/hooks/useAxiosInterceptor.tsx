@@ -11,6 +11,9 @@ const useAxiosInterceptor = () => {
     error => {
       if (error.response && error.response.status === 401) {
         navigate('admin/login');
+
+        console.log("not authenticated")
+
       }
       return Promise.reject(error);
     }

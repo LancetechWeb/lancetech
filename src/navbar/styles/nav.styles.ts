@@ -10,7 +10,7 @@ const NavStyle = styled.div<NavStyleProps>`
   justify-content: space-between;
   padding: 1rem 4rem;
   position: fixed;
-  background-color: ${({ navFixed }) => (navFixed ? '' : DarkBlue3)};
+  background-color: ${({ $navfixed }) => ($navfixed ? '' : DarkBlue3)};
   left: 0;
   right: 0;
   z-index: 20;

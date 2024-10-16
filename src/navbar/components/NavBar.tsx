@@ -6,7 +6,7 @@ import Logo from '../../core/components/Logo';
 import NavStyle from '../styles/nav.styles';
 import NavButtonComponent from './NavButtonComponent';
 
-const NavBar = ({ navFixed }:{navFixed:boolean}) => {
+const NavBar = ({ navfixed }:{navfixed:boolean}) => {
   const dispatch = useDispatch();
 
   const { MainBlue } = COLORS;
@@ -16,7 +16,7 @@ const NavBar = ({ navFixed }:{navFixed:boolean}) => {
   };
 
   return (
-    <NavStyle navFixed={navFixed}>
+    <NavStyle $navfixed={navfixed}>
       <Box className="webNavLogo">
         <Logo />
       </Box>

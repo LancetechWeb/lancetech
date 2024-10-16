@@ -8,19 +8,14 @@ import Testimonials from './Testimonials/Testimonials';
 import Team from './TheTeam/Team';
 import { Link } from '@mui/material';
 import NavigationRoundedIcon from '@mui/icons-material/NavigationRounded';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { HomeStyle } from '../styles/HomeStyle';
 import Header from './Header/Header';
-import { setPreviousPage } from '../../core/reducers/coreSlice';
 import Discover from './Discover/Discover';
 import { RootState } from '../../store';
 
 const Home = () => {
   const scrollIcon = useSelector((state:RootState) => state.uIReducer.scrollIcon);
-  const dispatch = useDispatch();
-
-  useEffect(() => () => {dispatch(setPreviousPage('/'))});
 
   return (
     <HomeStyle>
