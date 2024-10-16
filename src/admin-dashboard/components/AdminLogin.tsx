@@ -1,14 +1,12 @@
 import { Box, Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import { textFieldStyles } from '../../core/styles/textField.styles'
 import { COLORS } from '../../core/styles/COLORS'
 import { useDispatch } from 'react-redux'
 import { setIsAuthenticated } from '../../core/reducers/coreSlice'
 
 const AdminLogin = () => {
-  const navigate = useNavigate()
   const { DarkBlue3 } = COLORS;
   const dispatch = useDispatch()
 

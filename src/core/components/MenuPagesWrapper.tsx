@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
-import { Outlet, useBlocker } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setScrollIcon } from '../reducers/uiSlice';
