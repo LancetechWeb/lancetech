@@ -26,7 +26,9 @@ const AdminAuthWrapper = () => {
 
   console.log("")
 
-  return( <Outlet/>)  
+  return(<>
+   <Outlet/>
+  </>)  
 }
 
 export default AdminAuthWrapper

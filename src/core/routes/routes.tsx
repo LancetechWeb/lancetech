@@ -7,7 +7,7 @@ import ContactUs from "../../contact-us/components/ContactUs";
 import AdminAuthWrapper from "../../admin-dashboard/components/AdminAuthWrapper";
 import AdminLogin from "../../admin-dashboard/components/AdminLogin";
 import ErrorComponent from "../components/ErrorComponent";
-import AdminComponent from "../../admin-dashboard/components/AdminComponent";
+import AdminDashboard from "../../admin-dashboard/components/AdminDashboard";
 import MenuPagesWrapper from "../components/MenuPagesWrapper";
 import RootComponent from "../components/RootComponent";
 
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <AdminAuthWrapper />,
         children: [
           { path: 'login', element: <AdminLogin /> },
-          { path: 'dashboard', element: <AdminComponent /> },
+          { path: 'dashboard', element: <AdminDashboard /> },
         ],
       },
     ]

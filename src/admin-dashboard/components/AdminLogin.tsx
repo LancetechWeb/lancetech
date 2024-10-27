@@ -1,14 +1,18 @@
-import { Box, Button, TextField } from '@mui/material'
+import { Box, Button, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import axios from 'axios'
 import { textFieldStyles } from '../../core/styles/textField.styles'
 import { COLORS } from '../../core/styles/COLORS'
 import { useDispatch } from 'react-redux'
 import { setIsAuthenticated } from '../../core/reducers/coreSlice'
+import Logo from '../../core/components/Logo'
+import { loginComponentStyles } from '../styles/admin.styles'
 
 const AdminLogin = () => {
   const { DarkBlue3 } = COLORS;
   const dispatch = useDispatch()
+
+  const today = new Date()
 
   // local state
   const [email, setEmail] = useState<string>('');
@@ -50,40 +54,70 @@ const AdminLogin = () => {
       } catch (error) {
         console.log("error", error)
       }
-    };
+  };
 
 
 
     
   return (
     <Box 
+      sx={loginComponentStyles}
+    >
+      <Logo noText/>
+
+      <Box sx={{ 
+        display:"flex", 
+        flexDirection:"column", 
+        alignItems:"center", 
+        justifyContent:"center", 
+        gap:3, 
+        py:10,
+        px:5,
+        border:`1px solid ${COLORS.MainBlue}`,
+        borderRadius:"5px",
+        width:"20%",
+        minWidth:"200px",
+        maxWidth:"380px"
+      }}>
+        <TextField 
+          id="outlined-basic" 
+          label="Email" 
+          variant="outlined" 
+          onChange={handleEmail}
+          InputLabelProps={{
+              style: { color: 'white' }, // Label color
+          }}
+          sx={textFieldStyles}
+        />
+
+        <TextField 
+          id="outlined-basic" 
+          label="Password" 
+          type='password'
+          variant="outlined" 
+          onChange={handlePassword} 
+          InputLabelProps={{
+            style: { color: 'white' }, // Label color
+          }}
+          sx={textFieldStyles}
+        />
+
+        <Button variant="contained" onClick={handleLogin} sx={{width:"100%", mt:5, py:2}}>
+          Login
+        </Button>
+      </Box>
+      <Typography 
+         variant='caption'
+
         sx={{
-            width:"100vw", 
-            height:"70vh", 
-            display:"flex", 
-            flexDirection:"column", 
-            alignItems:"center", 
-            justifyContent:"center", 
-            gap:1, 
-            // border:"2px solid red"
-            backgroundColor:DarkBlue3
-            
+          justifySelf:"flex-start", 
+          position:"absolute", 
+          bottom:5,
+          color:COLORS.LightFont
         }}>
 
-      <TextField id="outlined-basic" label="Email" variant="outlined" onChange={handleEmail}
-      InputLabelProps={{
-          style: { color: 'white' }, // Label color
-      }}
-      sx={textFieldStyles}/>
-
-      <TextField id="outlined-basic" label="Password" variant="outlined" onChange={handlePassword} 
-      InputLabelProps={{
-        style: { color: 'white' }, // Label color
-      }}
-      
-      sx={textFieldStyles}/>
-      <Button variant="contained" onClick={handleLogin}>Login</Button>
-      {/* {idArray.map(num=><ImageDisplay id={num}/>)} */}
+        © {today.getFullYear()} Lancetech Services, Ltd. All rights reserved.
+      </Typography>
     </Box>
   )
 }
