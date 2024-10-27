@@ -9,7 +9,6 @@ import Logo from '../../core/components/Logo'
 import { loginComponentStyles } from '../styles/admin.styles'
 
 const AdminLogin = () => {
-  const { DarkBlue3 } = COLORS;
   const dispatch = useDispatch()
 
   const today = new Date()
