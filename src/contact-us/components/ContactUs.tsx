@@ -90,7 +90,7 @@ const ContactUs = () => {
         </IconButton>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 3, width: '100%', maxWidth: '50rem' }}>
           <Icon className="connectImage">connect_without_contact</Icon>
-          <Typography variant="h1" sx={{ fontFamily: 'inherit' }}>
+          <Typography variant="h4" sx={{ fontFamily: 'inherit' }}>
             Let's level up your <br /> brand, together
           </Typography>
         </Box>
@@ -102,7 +102,7 @@ const ContactUs = () => {
             flexDirection: 'column',
             gap: '2rem',
             maxWidth: '50rem',
-            height: '60%',
+            // height: '60%',
           }}
         >
           <TextField

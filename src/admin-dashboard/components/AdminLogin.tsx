@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { textFieldStyles } from '../../core/styles/textField.styles'
 import { COLORS } from '../../core/styles/COLORS'
@@ -55,6 +55,17 @@ const AdminLogin = () => {
       }
   };
 
+  const compRef = useRef<HTMLElement>()
+
+  // to scroll to the bottom in phones
+  // so the whole page can be seen
+  useEffect(()=>{
+    if(compRef.current){
+      compRef.current.scrollIntoView()
+      console.log("compRef", compRef.current)     
+    }
+  }, [])
+
 
 
     
@@ -71,11 +82,11 @@ const AdminLogin = () => {
         justifyContent:"center", 
         gap:3, 
         py:10,
-        px:5,
+        px:4,
         border:`1px solid ${COLORS.MainBlue}`,
         borderRadius:"5px",
         width:"20%",
-        minWidth:"200px",
+        minWidth:"250px",
         maxWidth:"380px"
       }}>
         <TextField 
@@ -105,18 +116,20 @@ const AdminLogin = () => {
           Login
         </Button>
       </Box>
-      <Typography 
-         variant='caption'
+      <Box ref={compRef} 
+          sx={{
+            justifySelf:"flex-start", 
+            position:"absolute", 
+            bottom:50,
+            color:COLORS.LightFont
+          }}>
+        <Typography 
+          variant='caption'
+>
 
-        sx={{
-          justifySelf:"flex-start", 
-          position:"absolute", 
-          bottom:5,
-          color:COLORS.LightFont
-        }}>
-
-        © {today.getFullYear()} Lancetech Services, Ltd. All rights reserved.
-      </Typography>
+          © {today.getFullYear()} Lancetech Services, Ltd. All rights reserved.
+        </Typography>
+      </Box>
     </Box>
   )
 }

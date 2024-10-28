@@ -10,6 +10,9 @@ import ErrorComponent from "../components/ErrorComponent";
 import AdminDashboard from "../../admin-dashboard/components/AdminDashboard";
 import MenuPagesWrapper from "../components/MenuPagesWrapper";
 import RootComponent from "../components/RootComponent";
+import ProfileComponent from "../../admin-dashboard/components/ProfileComponent";
+import RolesComponent from "../../admin-dashboard/components/RolesComponent";
+import SettingsComponent from "../../admin-dashboard/components/SettingsComponent";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +42,16 @@ const router = createBrowserRouter([
         element: <AdminAuthWrapper />,
         children: [
           { path: 'login', element: <AdminLogin /> },
-          { path: 'dashboard', element: <AdminDashboard /> },
+          { 
+            path: 'dashboard', 
+            element: <AdminDashboard />,
+            children:[
+              {index:true, element:<ProfileComponent/>},
+              {path:'profile', element:<ProfileComponent/>},
+              {path:'roles', element:<RolesComponent/>},
+              {path:'settings', element:<SettingsComponent/>}
+            ] 
+          },
         ],
       },
     ]

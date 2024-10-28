@@ -12,7 +12,7 @@ const AdminDashboard = () => {
       }}
     >
       <DashboardSideMenu/>
-      <DashboardDisplayComponent/>
+      <DashboardDisplayComponent />
     </Box>
   )
 }
