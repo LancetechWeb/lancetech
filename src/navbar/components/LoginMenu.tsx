@@ -33,7 +33,7 @@ const LoginMenu = () => {
 
 
   return (
-    <React.Fragment>
+    <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="Login">
             <Button
@@ -103,7 +103,7 @@ const LoginMenu = () => {
           Logout
         </MenuItem>
       </Menu>
-    </React.Fragment>
+    </>
   );
 }
 

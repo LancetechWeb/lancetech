@@ -7,10 +7,11 @@ import { useDispatch } from 'react-redux'
 import { setIsAuthenticated } from '../../core/reducers/coreSlice'
 import Logo from '../../core/components/Logo'
 import { loginComponentStyles } from '../styles/admin.styles'
+import { useNavigate } from 'react-router-dom'
 
 const AdminLogin = () => {
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const today = new Date()
 
   // local state
@@ -46,7 +47,7 @@ const AdminLogin = () => {
         console.log("response", response);
         if(response.status === 200){
           dispatch(setIsAuthenticated(true))
-          //  navigate('/admin/dashboard')
+           navigate('/admin/dashboard')
         }
 
         // setData(response.data)
@@ -60,14 +61,9 @@ const AdminLogin = () => {
   // to scroll to the bottom in phones
   // so the whole page can be seen
   useEffect(()=>{
-    if(compRef.current){
-      compRef.current.scrollIntoView()
-      console.log("compRef", compRef.current)     
-    }
+    if(compRef.current)
+      compRef.current.scrollIntoView()   
   }, [])
-
-
-
     
   return (
     <Box 

@@ -7,6 +7,7 @@ import { COLORS } from '../../core/styles/COLORS';
 import { RootState } from '../../store';
 import { TransitionProps } from '@mui/material/transitions';
 import Button from '../../core/styles/Button';
+import LoginMenu from './LoginMenu';
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -38,6 +39,7 @@ const MobileMenu = () => {
         <IconButton sx={{ position: 'absolute', right: '2rem', top: '2rem', zIndex: 10 }} onClick={handleClose} aria-label="close">
           <Icon sx={{ fontSize: '2rem' }}>close</Icon>
         </IconButton>
+
         <DialogContent
           sx={{
             display: 'flex',
@@ -64,6 +66,7 @@ const MobileMenu = () => {
             },
           }}
         >
+
           <NavLink to="" className={({ isActive }) => (isActive ? 'active' : undefined)} onClick={handleClose}>
             Home
           </NavLink>
@@ -74,6 +77,7 @@ const MobileMenu = () => {
             Contact
           </NavLink>
           <Button onClick={handleNavigate}>See roles</Button>
+          <LoginMenu/>
         </DialogContent>
       </Dialog>
     </Box>

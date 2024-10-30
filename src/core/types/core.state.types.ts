@@ -1,5 +1,5 @@
 export interface CoreStateType{
     previousPage:string;
-    isAuthenticated:boolean;
+    isAuthenticated?:boolean;
 
 }

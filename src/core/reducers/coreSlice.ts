@@ -3,7 +3,7 @@ import { CoreStateType } from '../types/core.state.types';
 
 const initialState:CoreStateType = {
   previousPage: '/',
-  isAuthenticated:false
+  isAuthenticated:undefined
 };
 
 const coreSlice = createSlice({

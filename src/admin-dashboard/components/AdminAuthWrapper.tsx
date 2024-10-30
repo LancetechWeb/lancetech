@@ -16,15 +16,12 @@ const AdminAuthWrapper = () => {
    useEffect(()=>{
      console.log('what is isAuthenticated...', isAuthenticated);
  
-     !isAuthenticated &&  navigate('/admin/login') // Redirect to admin Login page
-     isAuthenticated &&  navigate('/admin/dashboard') // Redirect to admin Dashboard
+     isAuthenticated === false &&  navigate('/admin/login') // Redirect to admin Login page
+    //  isAuthenticated &&  navigate('/admin/dashboard') // Redirect to admin Dashboard
    }, [isAuthenticated, navigate])
 
    //hooks
   useAuthCheck()
-
-
-  console.log("")
 
   return(<>
    <Outlet/>

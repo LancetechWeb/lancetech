@@ -1,8 +1,15 @@
-import { Box } from '@mui/material'
+import { Box, Divider } from '@mui/material'
 import DashboardSideMenu from './DashboardSideMenu'
-import DashboardDisplayComponent from './DashboardDisplayComponent'
+import { Outlet } from 'react-router-dom'
+import DashBoardHeader from './DashBoardHeader'
 
 const AdminDashboard = () => {
+
+
+// RE-ROUTE TO THE PREVIOUS LINK FROM THE REDUX STORE
+
+
+
   return (
     <Box
       sx={{
@@ -12,7 +19,14 @@ const AdminDashboard = () => {
       }}
     >
       <DashboardSideMenu/>
-      <DashboardDisplayComponent />
+
+      <Box sx={{width:"100%"}}>
+        <DashBoardHeader/>
+        <Divider/>
+        {/* <Box sx={{width:"100%", display:"flex"}}> */}
+          <Outlet/>
+        {/* </Box> */}
+      </Box>
     </Box>
   )
 }
