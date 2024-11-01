@@ -14,7 +14,7 @@ const DashBoardHeader = () => {
 }
 
   return (
-    <Box sx={{py:2, display:"flex", alignItems:"center"}}>
+    <Box sx={{py:2, display:"flex", alignItems:"center", height:"10%", boxSizing:"border-box"}}>
       <IconButton onClick = {handleDashboardMenu}>
         <Icon>menu_Icon</Icon>
       </IconButton>

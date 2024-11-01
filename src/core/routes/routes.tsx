@@ -13,6 +13,7 @@ import RootComponent from "../components/RootComponent";
 import ProfileComponent from "../../admin-dashboard/components/ProfileComponent";
 import RolesComponent from "../../admin-dashboard/components/RolesComponent";
 import SettingsComponent from "../../admin-dashboard/components/SettingsComponent";
+import { DashboardMenu } from "../../admin-dashboard/types/dashboard.types";
 
 const router = createBrowserRouter([
   {
@@ -47,9 +48,9 @@ const router = createBrowserRouter([
             element: <AdminDashboard />,
             children:[
               {index: true, element:<ProfileComponent/>},
-              {path:'profile', element:<ProfileComponent/>},
-              {path:'roles', element:<RolesComponent/>},
-              {path:'settings', element:<SettingsComponent/>}
+              {path:DashboardMenu.PROFILE, element:<ProfileComponent/>},
+              {path:DashboardMenu.ROLES, element:<RolesComponent/>},
+              {path:DashboardMenu.SETTINGS, element:<SettingsComponent/>}
             ] 
           },
         ],

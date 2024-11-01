@@ -1,6 +1,7 @@
 export enum DashboardMenu {
     PROFILE = "Profile",
-    ROLES = "Roles"
+    ROLES = "Roles",
+    SETTINGS = "Settings"
 }
 
 
@@ -14,6 +15,11 @@ export const DashboardMenuObject:Record<DashboardMenu, {menu:DashboardMenu, icon
         menu: DashboardMenu.ROLES,
         icon: "work",
         path: "roles"
+    },
+    [DashboardMenu.SETTINGS]: {
+        menu: DashboardMenu.SETTINGS,
+        icon: "settings",
+        path: "settings"
     }
 }
 

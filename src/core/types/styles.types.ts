@@ -15,6 +15,7 @@ export interface ColorsType {
     White: string;
     LightBackground: string;
     FadedWhite: string;
+    LightButton:string;
   }
   
   /**

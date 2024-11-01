@@ -23,9 +23,7 @@ const AdminDashboard = () => {
       <Box sx={{width:"100%"}}>
         <DashBoardHeader/>
         <Divider/>
-        {/* <Box sx={{width:"100%", display:"flex"}}> */}
-          <Outlet/>
-        {/* </Box> */}
+        <Outlet/>
       </Box>
     </Box>
   )

@@ -14,4 +14,5 @@ export const COLORS: ColorsType = {
   White: '#FFFFFF',
   FadedWhite: '#e6e6e6',
   LightBackground: '#f9fafa',
+  LightButton: '#3493C5'
 };
