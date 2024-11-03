@@ -2,13 +2,14 @@
 import axios from 'axios';
 import { store } from '../../store';
 import { setIsAuthenticated } from '../../core/reducers/coreSlice';
+import { getVariable } from '../misc/env.misc';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:9000',
+  baseURL: getVariable("BASE_URL"),
   withCredentials: true, // If you're dealing with cookies or sessions
   headers: {
-      'Cache-Control': 'no-cache',            }
-  
+      'Cache-Control': 'no-cache',            
+  } 
 });
 
 // Add request interceptor
@@ -21,7 +22,12 @@ axiosInstance.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    console.error(error.message)
+
+     // Prevent propagation of the error
+     return; // Simply return to handle the error within the interceptor
+  }
 );
 
 // Add response interceptor
@@ -33,7 +39,11 @@ axiosInstance.interceptors.response.use(
       console.log('Unauthorized! Redirecting to login...');
       store.dispatch(setIsAuthenticated(false))
     }
-    return Promise.reject(error);
+
+    console.error(error.message)
+    
+    // Prevent propagation of the error
+    return; // Simply return to handle the error within the interceptor
   }
 );
 

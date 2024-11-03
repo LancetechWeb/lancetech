@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import axios from 'axios'
 import { useDispatch } from 'react-redux';
 import { setIsAuthenticated } from '../reducers/coreSlice';
+import axiosInstance from '../../utils/auth/axiosInstance';
 
 const useAuthCheck = () => {
   const dispatch = useDispatch()
@@ -11,15 +11,9 @@ const useAuthCheck = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.post(
-          'http://localhost:9000/authenticate/check-auth', 
+        const response = await axiosInstance.post(
+          '/authenticate/check-auth', 
           {},
-          {
-            withCredentials: true,
-            headers: {
-              'Cache-Control': 'no-cache',            
-            }
-          },
         ); // Endpoint to check authentication status
 
         if (response.status === 200) {

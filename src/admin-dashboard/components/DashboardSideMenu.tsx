@@ -19,14 +19,14 @@ const DashboardSideMenu = () => {
         display:"flex",
         flexDirection:"column",
         justifyContent:"space-between",
-        width:`${menuIsOpen ? "250px" : "60px"}`,
+        width:`${menuIsOpen ? "250px" : "80px"}`,
         borderRight:`1px solid ${COLORS.LightGrey}`,
-        pl:2,
-        pr: menuIsOpen ? 0 : 2,
         py:4,
+        px:2,
         wordWrap:"break-word",
         transition: 'width 0.3s ease-in-out', // Animation on width change
-        overflow:"hidden"
+        overflow:"hidden",
+        boxSizing:"border-box"
     }}>
         <Box>
             <img src={menuIsOpen ? logo:logoNoText} alt="lancetechLOGO" style={{height:"34px", paddingLeft:"16px"}}/>

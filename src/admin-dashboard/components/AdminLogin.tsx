@@ -8,6 +8,7 @@ import { setIsAuthenticated } from '../../core/reducers/coreSlice'
 import Logo from '../../core/components/Logo'
 import { loginComponentStyles } from '../styles/admin.styles'
 import { useNavigate } from 'react-router-dom'
+import { getVariable } from '../../utils/misc/env.misc'
 
 const AdminLogin = () => {
   const dispatch = useDispatch()
@@ -34,7 +35,7 @@ const AdminLogin = () => {
       };
   
       try {
-        const response = await axios.post('http://localhost:9000/authenticate/sign-in', postData,
+        const response = await axios.post(`${getVariable("BASE_URL")}/authenticate/sign-in`, postData,
           {
             withCredentials: true,
             headers: {
@@ -44,7 +45,6 @@ const AdminLogin = () => {
           },
         );
 
-        console.log("response", response);
         if(response.status === 200){
           dispatch(setIsAuthenticated(true))
            navigate('/admin/dashboard')
@@ -52,7 +52,7 @@ const AdminLogin = () => {
 
         // setData(response.data)
       } catch (error) {
-        console.log("error", error)
+        console.error("error", error)
       }
   };
 

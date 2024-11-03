@@ -8,7 +8,6 @@ export const GoogleURLConverter = (url: string): string => {
     const splitURL = url.split('/');
   
     let convertedURL = `https://drive.google.com/uc?export=view&id=${splitURL[5]}`;
-    // console.log(convertedURL);
   
     return convertedURL;
   };

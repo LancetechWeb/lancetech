@@ -15,9 +15,6 @@ const coreSlice = createSlice({
       state.previousPage = action.payload;
     },
     setIsAuthenticated: (state, action:PayloadAction<boolean>) => {
-      console.log('dispatching isAuthenticated...');
-
-
       state.isAuthenticated = action.payload;
     },
   },

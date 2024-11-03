@@ -2,13 +2,13 @@ import { Box, Divider } from '@mui/material'
 import DashboardSideMenu from './DashboardSideMenu'
 import { Outlet } from 'react-router-dom'
 import DashBoardHeader from './DashBoardHeader'
+import { useSelector } from 'react-redux'
+import { selectOpenDashboardMenu } from '../selectors/dashboard.selectors'
 
 const AdminDashboard = () => {
 
-
-// RE-ROUTE TO THE PREVIOUS LINK FROM THE REDUX STORE
-
-
+  // selectors
+  const menuIsOpen = useSelector(selectOpenDashboardMenu)
 
   return (
     <Box
@@ -20,7 +20,10 @@ const AdminDashboard = () => {
     >
       <DashboardSideMenu/>
 
-      <Box sx={{width:"100%"}}>
+      <Box sx={{ 
+        width:`${menuIsOpen ? "calc(100% - 250px)" : "calc(100% - 84px)"}`,
+        transition: 'width 0.3s ease-in-out', // Animation on width change
+      }}>
         <DashBoardHeader/>
         <Divider/>
         <Outlet/>

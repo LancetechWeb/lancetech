@@ -11,10 +11,8 @@ const AdminAuthWrapper = () => {
    // selectors
    const isAuthenticated = useSelector(selectIsAuthenticated)
 
-   console.log("auth check ran")
  
    useEffect(()=>{
-     console.log('what is isAuthenticated...', isAuthenticated);
  
      isAuthenticated === false &&  navigate('/admin/login') // Redirect to admin Login page
     //  isAuthenticated &&  navigate('/admin/dashboard') // Redirect to admin Dashboard

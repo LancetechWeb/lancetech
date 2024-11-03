@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Footerpages from "./FooterPages";
 import Home from "../../home/components/Home";
 import About from "../../about/components/About";
-import Roles from "../../roles/components/Roles";
+import Roles from "../../roles/components/RolesPage";
 import ContactUs from "../../contact-us/components/ContactUs";
 import AdminAuthWrapper from "../../admin-dashboard/components/AdminAuthWrapper";
 import AdminLogin from "../../admin-dashboard/components/AdminLogin";
@@ -11,7 +11,7 @@ import AdminDashboard from "../../admin-dashboard/components/AdminDashboard";
 import MenuPagesWrapper from "../components/MenuPagesWrapper";
 import RootComponent from "../components/RootComponent";
 import ProfileComponent from "../../admin-dashboard/components/ProfileComponent";
-import RolesComponent from "../../admin-dashboard/components/RolesComponent";
+import DashboardRolesComponent from "../../admin-dashboard/components/DashboardRolesComponent";
 import SettingsComponent from "../../admin-dashboard/components/SettingsComponent";
 import { DashboardMenu } from "../../admin-dashboard/types/dashboard.types";
 
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
             children:[
               {index: true, element:<ProfileComponent/>},
               {path:DashboardMenu.PROFILE, element:<ProfileComponent/>},
-              {path:DashboardMenu.ROLES, element:<RolesComponent/>},
+              {path:DashboardMenu.ROLES, element:<DashboardRolesComponent/>},
               {path:DashboardMenu.SETTINGS, element:<SettingsComponent/>}
             ] 
           },

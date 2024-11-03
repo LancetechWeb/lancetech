@@ -35,7 +35,7 @@ const DashboardMenuButton = ({
         alignItems:"center",
         // border: `1px solid ${isSelectedMenu ? COLORS.LightBackground : "none"}`,
         background: isSelectedMenu ? COLORS.LightButton : "none",
-        borderRadius: menuIsOpen ? 0 : "5px"
+        borderRadius:  "5px"
       }}
       onClick={()=> navigate(path)}
     >
