@@ -1,7 +1,7 @@
 // axiosInstance.js
 import axios from 'axios';
 import { store } from '../../store';
-import { setIsAuthenticated } from '../../core/reducers/coreSlice';
+import { setIsAuthenticated, setUser } from '../../core/reducers/coreSlice';
 import { getVariable } from '../misc/env.misc';
 
 const axiosInstance = axios.create({
@@ -38,6 +38,7 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 401) {
       console.log('Unauthorized! Redirecting to login...');
       store.dispatch(setIsAuthenticated(false))
+      store.dispatch(setUser(undefined))
     }
 
     console.error(error.message)

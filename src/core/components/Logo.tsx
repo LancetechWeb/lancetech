@@ -6,9 +6,9 @@ import { Box } from '@mui/material';
 const Logo = ({noText}:{noText?:boolean}) => {
   const navigate = useNavigate();
   return (
-    <Box sx={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-      {!noText && <img src={lancetechlOGO} alt="lancetechLOGO" />}
-      {noText && <img src={lancetechlOGONoText} alt="lancetechLOGO" />}
+    <Box sx={{ cursor: 'pointer', height:"100%" }} onClick={() => navigate('/')}>
+      {!noText && <img src={lancetechlOGO} alt="lancetechLOGO" style={{height:"100%"}}/>}
+      {noText && <img src={lancetechlOGONoText} alt="lancetechLOGO" style={{height:"100%"}}/>}
     </Box>
   );
 };

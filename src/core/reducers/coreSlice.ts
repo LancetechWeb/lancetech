@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CoreStateType } from '../types/core.state.types';
+import { CoreStateType, User } from '../types/core.state.types';
 
 const initialState:CoreStateType = {
   previousPage: '/',
-  isAuthenticated:undefined
+  isAuthenticated:undefined,
+  user:undefined
 };
 
 const coreSlice = createSlice({
@@ -17,8 +18,12 @@ const coreSlice = createSlice({
     setIsAuthenticated: (state, action:PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload;
     },
+    setUser: (state, action:PayloadAction<User | undefined>) => {
+      state.user = action.payload;
+    },
+    
   },
 });
 
-export const { setPreviousPage, setIsAuthenticated } = coreSlice.actions;
+export const { setPreviousPage, setIsAuthenticated, setUser } = coreSlice.actions;
 export const coreReducer = coreSlice.reducer;

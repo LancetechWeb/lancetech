@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectOpenDashboardMenu } from '../selectors/dashboard.selectors';
 import DashboardMenuButton from './DashboardMenuButton';
 import { DashboardMenu, DashboardMenus } from '../types/dashboard.types';
-import logo from '../../assets/lancetech.svg';
-import logoNoText from '../../assets/lancetech-logo-no-text.svg';
+import Logo from '../../core/components/Logo';
 
 const DashboardSideMenu = () => {
 
@@ -28,8 +27,8 @@ const DashboardSideMenu = () => {
         overflow:"hidden",
         boxSizing:"border-box"
     }}>
-        <Box>
-            <img src={menuIsOpen ? logo:logoNoText} alt="lancetechLOGO" style={{height:"34px", paddingLeft:"16px"}}/>
+        <Box sx={{display:"flex", alignItems:"center", height:"34px", pl:1}}>
+            <Logo noText={!menuIsOpen}/>
         </Box>
         <Box sx={{display:"flex", flexDirection:"column", gap:2, flexGrow:0.8}}>
             {DashboardMenus.filter(m => !excludedMenu.includes(m.menu)).map

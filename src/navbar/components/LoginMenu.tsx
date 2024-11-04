@@ -10,27 +10,53 @@ import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import {  Button } from '@mui/material';
 import { COLORS } from '../../core/styles/COLORS';
-import { useSelector } from 'react-redux';
-import { selectIsAuthenticated } from '../../core/selectors/core.selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsAuthenticated, selectUser } from '../../core/selectors/core.selectors';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../utils/auth/axiosInstance';
+import { setIsAuthenticated, setUser } from '../../core/reducers/coreSlice';
+import { setOpenMenu } from '../../core/reducers/uiSlice';
+import { getUserInitials } from '../helpers/navbar.helpers';
 
 const LoginMenu = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-     // selectors
-    const isAuthenticated = useSelector(selectIsAuthenticated)
+  // selectors
+  const isAuthenticated = useSelector(selectIsAuthenticated)
+  const user = useSelector(selectUser)
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if(isAuthenticated) setAnchorEl(event.currentTarget);
-    if(!isAuthenticated)navigate("/admin")
+    if(!isAuthenticated){
+      navigate("/admin/login")
+      dispatch(setOpenMenu(false));
+    }
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
+  // logout
+  const handleSignOut = () => 
+    axiosInstance.post(
+      '/authenticate/sign-out', 
+      {},
+    ).then(resp => {
+      setAnchorEl(null)
+      dispatch(setIsAuthenticated(false))
+      dispatch(setUser(undefined))
+    }
+    ).catch(error => console.error("error", error))
+  
+  const handleProfileMenu = () =>{
+    handleClose();
+    navigate("/admin/dashboard/profile")
+  }
 
-
+    const buttonText = (isAuthenticated && user) ? getUserInitials(user) : "Login"
 
   return (
     <>
@@ -48,7 +74,7 @@ const LoginMenu = () => {
                 <Typography sx={{
                     textTransform:"none",
                     color:COLORS.LightBlue
-                }}>Login</Typography>
+                }}>{buttonText}</Typography>
             </Button>
         </Tooltip>
 
@@ -92,11 +118,11 @@ const LoginMenu = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         disableScrollLock
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleProfileMenu}>
           <Avatar /> My Profile
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleSignOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

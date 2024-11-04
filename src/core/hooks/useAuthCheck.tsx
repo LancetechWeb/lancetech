@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setIsAuthenticated } from '../reducers/coreSlice';
+import { setIsAuthenticated, setUser } from '../reducers/coreSlice';
 import axiosInstance from '../../utils/auth/axiosInstance';
 
 const useAuthCheck = () => {
@@ -19,13 +19,16 @@ const useAuthCheck = () => {
         if (response.status === 200) {
           // User is authenticated
           dispatch(setIsAuthenticated(true))
+          dispatch(setUser(response.data))
         } else {
           // User is not authenticated
           dispatch(setIsAuthenticated(false))
+          dispatch(setUser(undefined))
         }
       } catch (error) {
         // Handle error or assume user is not authenticated
         dispatch(setIsAuthenticated(false))
+        dispatch(setUser(undefined))
       }
     };
 

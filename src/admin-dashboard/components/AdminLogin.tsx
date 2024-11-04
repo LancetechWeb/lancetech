@@ -4,7 +4,7 @@ import axios from 'axios'
 import { textFieldStyles } from '../../core/styles/textField.styles'
 import { COLORS } from '../../core/styles/COLORS'
 import { useDispatch } from 'react-redux'
-import { setIsAuthenticated } from '../../core/reducers/coreSlice'
+import { setIsAuthenticated, setUser } from '../../core/reducers/coreSlice'
 import Logo from '../../core/components/Logo'
 import { loginComponentStyles } from '../styles/admin.styles'
 import { useNavigate } from 'react-router-dom'
@@ -47,7 +47,8 @@ const AdminLogin = () => {
 
         if(response.status === 200){
           dispatch(setIsAuthenticated(true))
-           navigate('/admin/dashboard')
+          dispatch(setUser(response.data))
+          navigate('/admin/dashboard')
         }
 
         // setData(response.data)
@@ -69,7 +70,7 @@ const AdminLogin = () => {
     <Box 
       sx={loginComponentStyles}
     >
-      <Logo noText/>
+      <Box> <Logo noText/> </Box>
 
       <Box sx={{ 
         display:"flex", 
