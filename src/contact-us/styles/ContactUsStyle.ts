@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { GoogleURLConverter } from '../../core/helpers/GoogleURLConverter';
 import { COLORS } from '../../core/styles/COLORS';
+import { getVariable } from '../../utils/misc/env.misc';
 
 const { DarkBlue3, DarkBlue4, FadedWhite } = COLORS;
 
-const contactUsImgURL = GoogleURLConverter('https://drive.google.com/file/d/1n88j8eza271BwrTDC-Nq5UIFOhTZYMuD/view?usp=sharing');
+const contactUsImgURL = `${getVariable("BASE_URL")}/images/get-image/1n88j8eza271BwrTDC-Nq5UIFOhTZYMuD`;
 
 const ContactUsStyle = styled.div`
   display: flex;

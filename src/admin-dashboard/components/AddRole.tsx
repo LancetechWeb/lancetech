@@ -14,7 +14,12 @@ const AddRole = () => {
         axiosInstance.post(
             '/roles/create-role', 
             {title, rank, remote, description}
-        )
+        ).then(resp =>{
+            setTitle("")
+            setRank("")
+            setRemote("")
+            setDescription("")
+        } )
     }
 
   return (
@@ -31,6 +36,7 @@ const AddRole = () => {
         alignSelf:"center"
     }}>
             <TextField 
+                value={title}
                 id="outlined-basic" 
                 label="Title" 
                 variant="outlined" 
@@ -38,16 +44,19 @@ const AddRole = () => {
                 sx={{width:"100%"}}
             />
             <TextField
+                value={rank}
                 label="Rank" 
                 onChange={(e)=>setRank(e.target.value)}
                 sx={{width:"100%"}}
             />
             <TextField
+                value={remote}
                 label="Remote" 
                 onChange={(e)=>setRemote(e.target.value)}
                 sx={{width:"100%"}}
             />
             <TextField
+                value={description}
                 multiline
                 rows={5}
                 placeholder="role description"

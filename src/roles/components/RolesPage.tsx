@@ -1,13 +1,20 @@
 import { Box, Typography } from "@mui/material";
-import { roleFixtures } from "../__fixtures__/roles.fixtures";
 import RoleCard from "./RoleCard";
 import { RolesStyle } from "../styles/rolesStyle";
 import { COLORS } from "../../core/styles/COLORS";
+import useGetRoles from "../../core/hooks/useGetRoles";
+import { useSelector } from "react-redux";
+import { selectRoles } from "../selectors/roles.selectors";
 
 
 const RolesPage = () => {
   const { LightBackground } = COLORS;
 
+  // selectors
+  const roles = useSelector(selectRoles)
+
+  // hooks
+  useGetRoles()    
 
   return (
     <RolesStyle style={{ backgroundColor: LightBackground }}>
@@ -21,7 +28,7 @@ const RolesPage = () => {
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Box className="roleCards" sx={{ maxWidth: '1920px' }}>
-          { roleFixtures.map(role => <RoleCard {...role}/>)}    
+          { roles.map(role => <RoleCard {...role}/>)}    
        </Box>
       </Box>
     </RolesStyle>

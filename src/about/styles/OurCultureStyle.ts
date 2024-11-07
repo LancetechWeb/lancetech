@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { GoogleURLConverter } from '../../core/helpers/GoogleURLConverter';
 import { COLORS } from '../../core/styles/COLORS';
+import { getVariable } from '../../utils/misc/env.misc';
 
-const cultureImgURL = GoogleURLConverter('https://drive.google.com/file/d/1VYaBtUK7j1r_pcB49cchzgTx0lGt0XVG/view?usp=sharing');
+const cultureImgURL = `${getVariable("BASE_URL")}/images/get-image/1VYaBtUK7j1r_pcB49cchzgTx0lGt0XVG`
 
 export const OurCultureStyle = styled.div`
   background-color: ${COLORS.DarkBlue3};

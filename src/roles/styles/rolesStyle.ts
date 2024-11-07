@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { GoogleURLConverter } from '../../core/helpers/GoogleURLConverter';
+import { getVariable } from '../../utils/misc/env.misc';
 
-const bgImg = GoogleURLConverter('https://drive.google.com/file/d/17DY88QbmOzM2volO0bTxlJMOvxbG2z_a/view?usp=sharing');
+const bgImg = `${getVariable("BASE_URL")}/images/get-image/17DY88QbmOzM2volO0bTxlJMOvxbG2z_a`;
 
 export const RolesStyle = styled.div`
   @media only screen and (max-width: 800px) {
