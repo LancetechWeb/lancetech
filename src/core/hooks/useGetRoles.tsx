@@ -12,6 +12,8 @@ const useGetRoles = () => {
           const response = await axiosInstance.get('/roles/get-roles'); 
 
           dispatch(setRoles(response.data))
+
+          console.log("...fetching roles")
           
         } catch (error) {
           // Handle error

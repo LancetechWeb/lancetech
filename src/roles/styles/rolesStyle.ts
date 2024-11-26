@@ -44,21 +44,10 @@ export const RolesStyle = styled.div`
     }
   }
 
-  .roleCards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 20rem));
-    justify-content: center;
-    width: 100%;
-    box-sizing: border-box;
-    gap: 2.5rem;
-    margin: 3rem 0;
-  }
-
   .jobDescription {
     height: 8.2rem;
     padding: 0 0 1rem 0;
     text-align: justify;
-
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 8;

@@ -13,6 +13,11 @@ const DashboardRolesComponent = () => {
     // hooks
     useGetRoles()    
 
+    // handles role click
+    const handleRoleClick = (roleId:string) =>{
+      
+    }
+
   return (
     <Box sx={{display:"flex", flexDirection:"column", pt:2, gap:2}}>
         <AddRole/>
@@ -23,7 +28,7 @@ const DashboardRolesComponent = () => {
             borderTop:`1px solid ${COLORS.FadedWhite}`, 
             background:COLORS.LightBackground
         }}>
-            {roles.map(r=> <RoleCard {...r}/> )}
+            {roles.map(r=> <RoleCard role={r} onClick={handleRoleClick}/> )}
         </Box>
     </Box>
     

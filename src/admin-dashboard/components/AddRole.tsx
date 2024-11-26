@@ -2,6 +2,8 @@ import { Box, TextField, Button } from '@mui/material'
 import { useState } from 'react'
 import { COLORS } from '../../core/styles/COLORS'
 import axiosInstance from '../../utils/auth/axiosInstance'
+import { LexicalEditorComponent } from '../../utils/lexical'
+import {ToolbarIconsType, allToolbarIcons} from '../../utils/lexical'
 
 const AddRole = () => {
     // local state
@@ -30,9 +32,9 @@ const AddRole = () => {
         alignItems:"center",
         justifyContent:"center", 
         borderRadius:"5px",
-        width:"30%",
+        // width:"30%",
         minWidth:"250px",
-        maxWidth:"380px",
+        maxWidth:"500px",
         alignSelf:"center"
     }}>
             <TextField 
@@ -55,14 +57,10 @@ const AddRole = () => {
                 onChange={(e)=>setRemote(e.target.value)}
                 sx={{width:"100%"}}
             />
-            <TextField
+            <LexicalEditorComponent 
                 value={description}
-                multiline
-                rows={5}
-                placeholder="role description"
-                label="Description" 
-                onChange={(e)=>setDescription(e.target.value)}
-                sx={{width:"100%"}}
+                toolbarButtons={allToolbarIcons} 
+                onChange={(editorState:string)=>setDescription(editorState) }
             />
             <Button 
                 variant='contained' 

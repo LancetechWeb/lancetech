@@ -2,7 +2,7 @@ import { Role } from "../types/roles.types";
 
 export const roleFixtures:Array<Role> = [
     {
-        id: "",
+        _id: "",
         title: "React Developer",
         rank: "Mid Level",
         remote: "Remote contract",

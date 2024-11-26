@@ -18,21 +18,21 @@ const GrowWith = () => {
             <img src={GrowWith1} alt="GrowWithChild" />
             <div>
               <h4>Global presence</h4>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+              <p>Expand your reach with solutions that connect you to clients and markets worldwide.</p>
             </div>
           </div>
           <div className="growWithChild">
             <img src={GrowWith2} alt="GrowWithChild" />
             <div>
               <h4>Outstanding recognition</h4>
-              <p>Give your business an outstanding online presence</p>
+              <p>Elevate your brand with an impactful online presence that sets you apart.</p>
             </div>
           </div>
           <div className="growWithChild">
             <img src={GrowWith3} alt="GrowWithChild" />
             <div>
               <h4>Money for value</h4>
-              <p>We ensure you trade in money for maximum value.</p>
+              <p>Invest in innovative solutions that deliver exceptional value and measurable results.</p>
             </div>
           </div>
         </div>

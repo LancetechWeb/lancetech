@@ -57,6 +57,10 @@ const AdminLogin = () => {
       }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if(event.key === "Enter")handleLogin(event);
+  };
+
   const compRef = useRef<HTMLElement>()
 
   // to scroll to the bottom in phones
@@ -94,6 +98,7 @@ const AdminLogin = () => {
           InputLabelProps={{
               style: { color: 'white' }, // Label color
           }}
+          onKeyDown={handleKeyDown}
           sx={textFieldStyles}
         />
 
@@ -106,6 +111,7 @@ const AdminLogin = () => {
           InputLabelProps={{
             style: { color: 'white' }, // Label color
           }}
+          onKeyDown={handleKeyDown}
           sx={textFieldStyles}
         />
 

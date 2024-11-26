@@ -20,16 +20,15 @@ const MeetWith = () => {
 
         <div className="meetRight">
           <p className="meetFirstP">
-            Designers and programmers and managers have become so accustomed to working remotely, even for complex changing Lorem ipsum
-            dolor sit amet consectetur, adipisicing elit. Enim magni quo ab non? Error qui, iste consequuntur quasi <br />
-            <br /> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim magni quo ab non? Error qui, iste consequuntur quasi
+          Designers, programmers, and managers at Lancetech are experts in remote collaboration. No matter the complexity or scope of 
+          your project, our team ensures seamless communication and efficient delivery across time zones. <br />
+          <br /> Whether you need agile design updates or continuous project management, we adapt to your needs with flexibility and professionalism. 
           </p>
           <div>
             <Button>Get Started for Free</Button>
           </div>
           <p className="meetSecondP">
-            “The following article covers a topic that has recently moved to center stage–at least it seems that way. If you’ve been
-            thinking you need to know more about outsourcing, here’s your opportunity.”
+          "Outsourcing has become a game-changer for businesses globally. If you've been considering leveraging it, now’s the perfect time to dive in."
           </p>
           <h4>Daniel, Product Manager, Lancetech</h4>
         </div>

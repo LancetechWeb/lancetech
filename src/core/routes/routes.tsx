@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Footerpages from "./FooterPages";
 import Home from "../../home/components/Home";
 import About from "../../about/components/About";
-import Roles from "../../roles/components/RolesPage";
+import RolesPage from "../../roles/components/RolesPage";
 import ContactUs from "../../contact-us/components/ContactUs";
 import AdminAuthWrapper from "../../admin-dashboard/components/AdminAuthWrapper";
 import AdminLogin from "../../admin-dashboard/components/AdminLogin";
@@ -14,6 +14,7 @@ import ProfileComponent from "../../admin-dashboard/components/ProfileComponent"
 import DashboardRolesComponent from "../../admin-dashboard/components/DashboardRolesComponent";
 import SettingsComponent from "../../admin-dashboard/components/SettingsComponent";
 import { DashboardMenu } from "../../admin-dashboard/types/dashboard.types";
+import RoleDetails from "../../roles/components/RoleDetails";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,13 @@ const router = createBrowserRouter([
               { index: true, element: <Home /> },
               { path: 'home', element: <Home /> },
               { path: 'about', element: <About /> },
-              { path: 'roles', element: <Roles /> },
+              { 
+                path: 'roles', 
+                element: <RolesPage />, 
+                children:[
+                  { path: ':roleId', element: <RoleDetails /> },
+                ]
+              },
             ],
           },
           

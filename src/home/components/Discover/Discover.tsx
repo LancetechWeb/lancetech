@@ -14,7 +14,7 @@ const Discover = () => {
           <img src={DiscSVG1} alt="DiscSVG1" className="discSVG" />
           <h4> Strategy development</h4>
           <div className="pCont">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim magni quo ab non? Error qui, iste consequuntur quasi</p>
+            <p>We collaborate to define clear objectives, identify key challenges, and create tailored solutions that align with your business goals.</p>
           </div>
           <div className="ArrowSVG">
             <img src={ArrowSVG} alt="ArrowSVG" />
@@ -26,7 +26,7 @@ const Discover = () => {
             Product Development <br />
           </h4>
           <div className="pCont">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim magni quo ab non? Error qui, iste consequuntur quasi</p>
+            <p>From ideation to execution, we design and build innovative, user-centric products that deliver exceptional value.</p>
           </div>
           <div className="ArrowSVG">
             <img src={ArrowSVG} alt="ArrowSVG" id="ArrowSVG2" />
@@ -36,7 +36,7 @@ const Discover = () => {
           <img src={DiscSVG3} alt="DiscSVG3" className="discSVG" />
           <h4>Test, Prototype, Support</h4>
           <div className="pCont">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim magni quo ab non? Error qui, iste consequuntur quasi</p>
+            <p>We rigorously test and refine solutions, ensuring seamless performance while providing ongoing support for sustained success.</p>
           </div>
         </div>
       </div>

@@ -1,36 +1,35 @@
 import { Box, Typography, Card, CardContent } from '@mui/material'
 import { COLORS } from '../../core/styles/COLORS';
 import { Role } from '../types/roles.types';
+import { getDayHoursAgo } from '../../utils/date.helpers';
+import { FONTS } from '../../core/styles/FONTS';
 
-const RoleCard = (props:Role) => {
-    const { LightFont } = COLORS;
+const RoleCard = ({role, onClick}:{role:Role; onClick:(roleId:string)=> void}) => {
 
-    const {title, rank, remote, description} = props
-
+    const {_id, title, rank, remote} = role
   return (
     <Card
         sx={{
-            pt: 1,
-            px: 1,
-            boxShadow: '8px 8px 10px 10px #bfbfbf2c',
             maxHeight: "320px",
-            width: "300px", // More reasonable width
+            width: "300px", 
             flexShrink: 0, // Prevent card from shrinking
-            marginRight: "16px" // Optional: adds space between cards
+            cursor:"pointer",
+            p:2
         }}
+        onClick={()=> onClick(_id)}
     >
         <CardContent>
             <Box>
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                <Typography variant="h6" component="div" sx={{ fontWeight: 800, m: 0, lineHeight: '20px' }}>
-                {title}
-                </Typography>
-                <Typography sx={{ fontSize: 14, fontWeight: 700 }} gutterBottom>{rank}</Typography>
-            </Box>
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <Typography variant="h6" sx={{ fontWeight: 800, m: 0, lineHeight: '20px' }}>
+                        {title}
+                    </Typography>
+                    <Typography sx={{ fontSize: 14, fontWeight: 700 }} >{rank}</Typography>
+                </Box>
             </Box>
 
             <Typography sx={{ my: '1rem', fontWeight: 700 }} color="text.secondary">{remote}</Typography>
-            <Typography className="jobDescription" sx={{ color: LightFont }}>{description}</Typography>
+            <Typography sx={{color:COLORS.LightBlue, fontSize:FONTS.mini}}>Posted {getDayHoursAgo(role.createdAt)}</Typography>
         </CardContent>
     </Card>
   )
