@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Icon, Typography } from '@mui/material'
+import { Box, Button, Divider, Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectRoleById } from '../selectors/roles.selectors'
 import { RootState } from '../../store'

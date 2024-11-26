@@ -2,7 +2,7 @@ import GiphySearchComponents from './GiphySearchComponent';
 import {
   SearchContextManager, // the context manager, includes the Context.Provider
 } from '@giphy/react-components';
-import React from 'react';
+import { getVariable } from '../../misc/env.misc';
 
 const GiphyComponent = ({
   uploadFile,
@@ -11,7 +11,7 @@ const GiphyComponent = ({
 }) => (
   <SearchContextManager
     options={{ rating: 'pg' }}
-    apiKey="5xK2mVgvv7N636YCMW6UaJFFGEtFnKhU"
+    apiKey={getVariable("GIPHY_API_KEY")}
   >
     <GiphySearchComponents uploadFile={uploadFile} />
   </SearchContextManager>

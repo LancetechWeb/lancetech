@@ -7,7 +7,7 @@ import {
 import { ToolbarIcons } from '../types/toolbar.types';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
-import { Box, Popper, useTheme } from '@mui/material';
+import { Box, Popper } from '@mui/material';
 import React from 'react';
 import type { MiscFormat } from '../types/toolbar.types';
 
@@ -19,7 +19,6 @@ const GifToolbarPlugin = ({
   // eslint-disable-next-line react/boolean-prop-naming
   readonly disabled?: boolean;
 }) => {
-  const theme = useTheme();
   const [editor] = useLexicalComposerContext();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);

@@ -8,7 +8,6 @@ import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { Box, useTheme } from '@mui/material';
-import React from 'react';
 import type { SxProps } from '@mui/material';
 import type { EditorState, LexicalEditor } from 'lexical';
 import type { CSSProperties } from 'react';

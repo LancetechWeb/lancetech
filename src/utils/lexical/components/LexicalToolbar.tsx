@@ -14,7 +14,6 @@ import {
   TextFormat,
 } from '../types/toolbar.types';
 import { Box } from '@mui/material';
-import React from 'react';
 import type { SxProps } from '@mui/material';
 
 const LexicalToolbar = ({

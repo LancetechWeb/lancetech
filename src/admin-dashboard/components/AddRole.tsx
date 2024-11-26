@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { COLORS } from '../../core/styles/COLORS'
 import axiosInstance from '../../utils/auth/axiosInstance'
 import { LexicalEditorComponent } from '../../utils/lexical'
-import {ToolbarIconsType, allToolbarIcons} from '../../utils/lexical'
+import { allToolbarIcons} from '../../utils/lexical'
 
 const AddRole = () => {
     // local state
@@ -32,7 +32,6 @@ const AddRole = () => {
         alignItems:"center",
         justifyContent:"center", 
         borderRadius:"5px",
-        // width:"30%",
         minWidth:"250px",
         maxWidth:"500px",
         alignSelf:"center"
