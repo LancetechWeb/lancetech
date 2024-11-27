@@ -7,6 +7,8 @@ import { SlickStyle } from '../../../styles/slickCarousel.styles';
 import Slider from 'react-slick';
 import { TestimonialList } from '../../../data/testimonials.data';
 import { LeftBtn, RightBtn } from '../../Button/ButtonGroup';
+import { Box } from '@mui/material';
+import CustomCarousel from '../../../../utils/custom-carousel/CustomCarousel';
 
 
 const SlickCarousel = () => {
@@ -159,6 +161,8 @@ const SlickCarousel = () => {
   };
 
   return (
+    <Box>
+
     <SlickStyle>
       <div>
         <div>
@@ -174,6 +178,16 @@ const SlickCarousel = () => {
           TestimonialList.map(results => <Cards cardImage={results.avatar} cardBody={results.testimony} handle={results.handle} />)}
       </Slider>
     </SlickStyle>
+
+    <CustomCarousel 
+      items={
+        TestimonialList && 
+          TestimonialList.map(results => <Cards cardImage={results.avatar} cardBody={results.testimony} handle={results.handle}  />)
+        }
+        scrollInterval={1}
+    />
+  </Box>
+
   );
 };
 

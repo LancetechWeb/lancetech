@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import RoleCard from "./RoleCard";
 import { RolesStyle } from "../styles/rolesStyle";
 import { COLORS } from "../../core/styles/COLORS";
@@ -12,6 +12,8 @@ const RolesPage = () => {
   const navigate = useNavigate()
   const { LightBackground } = COLORS;
   const {roleId} = useParams()
+  const isMobile = useMediaQuery("(max-width:800px)")
+
 
   // selectors
   const roles = useSelector(selectRoles)
@@ -37,23 +39,25 @@ const RolesPage = () => {
       </Box>
       <Box sx={{ display: 'flex',   maxWidth:"1920px", mx:"auto", py:2 }}>
         <Box 
-        className="roleCards" 
-        sx={{
-          display:"flex", 
-          flexDirection:roleId ? "column" : "row", 
-          flexWrap:roleId ? "no-wrap":"wrap",
-          justifyContent:roleId ? "" : "center",
-          alignItems:"center",
-          minWidth:"fit-content",
-          height:roleId ? "100vh" : "100%",
-          gap: "2.5rem",
-          overflowY: "auto",
-          p:2,
+          className="roleCards" 
+          sx={{
+            display:isMobile && roleId ? "none" : "flex", 
+            flexDirection:roleId ? "column" : "row", 
+            flexWrap:roleId ? "no-wrap":"wrap",
+            justifyContent:roleId ? "" : "center",
+            alignItems:"center",
+            minWidth:"fit-content",
+            height:roleId ? "100vh" : "100%",
+            gap: "2.5rem",
+            overflowY: "auto",
+            p:2,
+            ...(roleId && {borderRight:`1px solid ${COLORS.LightGrey}`}),
 
-          "& :hover":{
-            scale:1.01
-          },
-        }}>
+            "& :hover":{
+              scale:1.01
+            },
+          }}
+        >
           { roles.map(role => <RoleCard role={role} onClick={handleRoleClick}/>)}    
         </Box>
          <Outlet/>

@@ -13,6 +13,9 @@ const RoleDetails = () => {
 
     // selectors
     const role = useSelector((state:RootState)=>selectRoleById(state, roleId ?? ""))
+
+
+
     if(!role || !role.isActive) return <Box>Oops! we do not have that role anymore!</Box>
 
   return (
@@ -42,7 +45,10 @@ const RoleDetails = () => {
         </Box>
         <Divider/>
 
-        <Typography>{role.description}</Typography>
+        <Box 
+            sx={{'& a':{color:COLORS.LightBlue}}}
+            dangerouslySetInnerHTML={{ __html: role.description }}
+        />
     </Box>
   )
 }
