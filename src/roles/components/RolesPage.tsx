@@ -1,31 +1,16 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
-import RoleCard from "./RoleCard";
+import { Box, Typography } from "@mui/material";
 import { RolesStyle } from "../styles/rolesStyle";
 import { COLORS } from "../../core/styles/COLORS";
 import useGetRoles from "../../core/hooks/useGetRoles";
-import { useSelector } from "react-redux";
-import { selectRoles } from "../selectors/roles.selectors";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
-
+import { Outlet } from "react-router-dom";
+import RoleSearchComponent from "./RoleSearchComponent";
+import RolesDisplay from "./RolesDisplay";
 
 const RolesPage = () => {
-  const navigate = useNavigate()
   const { LightBackground } = COLORS;
-  const {roleId} = useParams()
-  const isMobile = useMediaQuery("(max-width:800px)")
-
-
-  // selectors
-  const roles = useSelector(selectRoles)
 
   // hooks
   useGetRoles()    
-
-  const handleRoleClick = (id:string) =>{
-    navigate(`/roles/${id}`)
-
-    console.log("roleId", id)
-  }
 
   return (
     <RolesStyle style={{ backgroundColor: LightBackground }}>
@@ -37,29 +22,9 @@ const RolesPage = () => {
           Job Opportunities
         </Typography>
       </Box>
-      <Box sx={{ display: 'flex',   maxWidth:"1920px", mx:"auto", py:2 }}>
-        <Box 
-          className="roleCards" 
-          sx={{
-            display:isMobile && roleId ? "none" : "flex", 
-            flexDirection:roleId ? "column" : "row", 
-            flexWrap:roleId ? "no-wrap":"wrap",
-            justifyContent:roleId ? "" : "center",
-            alignItems:"center",
-            minWidth:"fit-content",
-            height:roleId ? "100vh" : "100%",
-            gap: "2.5rem",
-            overflowY: "auto",
-            p:2,
-            ...(roleId && {borderRight:`1px solid ${COLORS.LightGrey}`}),
-
-            "& :hover":{
-              scale:1.01
-            },
-          }}
-        >
-          { roles.map(role => <RoleCard role={role} onClick={handleRoleClick}/>)}    
-        </Box>
+      <RoleSearchComponent/>
+      <Box sx={{ display: 'flex', maxWidth:"1920px", mx:"auto", py:2}}>
+        <RolesDisplay/>
          <Outlet/>
       </Box>
     </RolesStyle>
