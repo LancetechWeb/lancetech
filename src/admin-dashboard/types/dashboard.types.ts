@@ -1,3 +1,10 @@
+import { Role } from "../../roles/types/roles.types"
+
+export interface DashboardInitialState{
+    openDashboardMenu: boolean,
+    editRole?:Role
+}
+
 export enum DashboardMenu {
     PROFILE = "Profile",
     ROLES = "Roles",

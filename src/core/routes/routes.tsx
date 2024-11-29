@@ -11,7 +11,7 @@ import AdminDashboard from "../../admin-dashboard/components/AdminDashboard";
 import MenuPagesWrapper from "../components/MenuPagesWrapper";
 import RootComponent from "../components/RootComponent";
 import ProfileComponent from "../../admin-dashboard/components/ProfileComponent";
-import DashboardRolesComponent from "../../admin-dashboard/components/DashboardRolesComponent";
+import DashboardRolesComponent from "../../admin-dashboard/components/AdminDashboardRoles/DashboardRolesComponent";
 import SettingsComponent from "../../admin-dashboard/components/SettingsComponent";
 import { DashboardMenu } from "../../admin-dashboard/types/dashboard.types";
 import RoleDetails from "../../roles/components/RoleDetails";

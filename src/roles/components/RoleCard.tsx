@@ -7,6 +7,7 @@ import { FONTS } from '../../core/styles/FONTS';
 const RoleCard = ({role, onClick}:{role:Role; onClick:(roleId:string)=> void}) => {
 
     const {_id, title, rank, remote} = role
+
   return (
     <Card
         sx={{
@@ -14,10 +15,13 @@ const RoleCard = ({role, onClick}:{role:Role; onClick:(roleId:string)=> void}) =
             width: "300px", 
             flexShrink: 0, // Prevent card from shrinking
             cursor:"pointer",
-            p:2
+            p:2,
+            position:"relative"
         }}
         onClick={()=> onClick(_id)}
     >
+        <Box sx={{position:"absolute", right:5, top:5, zIndex:1000}}>
+        </Box>
         <CardContent>
             <Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>

@@ -8,14 +8,17 @@ import { getDayHoursAgo } from '../../utils/date.helpers'
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 
 
-const RoleDetails = () => {
+const RoleDetails = ({id}:{id?:string}) => {
     const {roleId} = useParams();
     const isMobile = useMediaQuery("(max-width:800px)")
 
-    // selectors
-    const role = useSelector((state:RootState)=>selectRoleById(state, roleId ?? ""))
+    const actualRoleId = id ?? roleId ?? ""
 
-    if(!role || !role.isActive) return <Box>Oops! we do not have that role anymore!</Box>
+
+    // selectors
+    const role = useSelector((state:RootState)=>selectRoleById(state, actualRoleId))
+
+    if(!role || !role.isActive) return <Box>Oops! seems that opening does not exist anymore</Box>
 
     return (
         <Box 

@@ -1,16 +1,29 @@
 import { Box, TextField, Button } from '@mui/material'
 import { useState } from 'react'
-import { COLORS } from '../../core/styles/COLORS'
-import axiosInstance from '../../utils/auth/axiosInstance'
-import { LexicalEditorComponent } from '../../utils/lexical'
-import { allToolbarIcons} from '../../utils/lexical'
+import { COLORS } from '../../../core/styles/COLORS'
+import axiosInstance from '../../../utils/auth/axiosInstance'
+import { LexicalEditorComponent } from '../../../utils/lexical'
+import { allToolbarIcons} from '../../../utils/lexical'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectEditRole } from '../../selectors/dashboard.selectors'
+import { setEditRole } from '../../reducers/dashboard.reducers'
+import { Role } from '../../../roles/types/roles.types'
 
-const AddRole = () => {
+const AddRole = ({
+    role    
+}:{
+    role?:Role
+}) => {
+    const dispatch = useDispatch()
+
     // local state
-    const [title, setTitle] = useState<string>("")
-    const [rank, setRank] = useState<string>("")
-    const [remote, setRemote] = useState<string>("")
-    const [description, setDescription] = useState<string>("")
+    const [title, setTitle] = useState<string>(role?.title ?? "")
+    const [rank, setRank] = useState<string>(role?.rank ?? "")
+    const [remote, setRemote] = useState<string>(role?.remote ?? "")
+    const [description, setDescription] = useState<string>(role?.description ?? "")
+
+    // selectors
+    const editRole = useSelector(selectEditRole)
 
     const handleAddRole = () => {
         axiosInstance.post(
@@ -24,6 +37,14 @@ const AddRole = () => {
         } )
     }
 
+    const handleCancelRoleEdit = ()=>{
+        dispatch(setEditRole(undefined))
+    }
+
+    const handleRoleUpdate = () =>{
+        
+    }
+
   return (
     <Box sx={{
         display:"flex", 
@@ -34,7 +55,8 @@ const AddRole = () => {
         borderRadius:"5px",
         minWidth:"250px",
         maxWidth:"500px",
-        alignSelf:"center"
+        alignSelf:"center",
+        maxHeight:"75%"
     }}>
             <TextField 
                 value={title}
@@ -69,10 +91,22 @@ const AddRole = () => {
                     py:2, 
                     background:COLORS.MainBlue
                 }}
-                onClick={handleAddRole}
+                onClick={editRole ? handleRoleUpdate : handleAddRole}
             >
-                Add Role
+               {editRole ? "Update Role" : "Add Role"}
             </Button>
+            {editRole && <Button 
+                variant='outlined' 
+                sx={{
+                    width:"100%", 
+                    mt:1, 
+                    py:2, 
+                    border:`1px solid ${COLORS.MainBlue}`
+                }}
+                onClick={handleCancelRoleEdit}
+            >
+               Cancel
+            </Button>}
     </Box>
   )
 }

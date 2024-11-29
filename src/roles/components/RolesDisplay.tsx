@@ -17,7 +17,7 @@ const RolesDisplay = () => {
         navigate(`/roles/${id}`)
     
         console.log("roleId", id)
-      }
+    }
 
   return (
     <Box 
