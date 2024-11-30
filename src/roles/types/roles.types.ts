@@ -1,3 +1,5 @@
+import { InitialStateManagement } from "../../utils/state/types/state.types";
+
 export interface Role{
     _id:string;
     title:string;
@@ -9,6 +11,9 @@ export interface Role{
     updatedAt: string;
 }
 
-export interface RoleStateType{
-    roles:Role[]
+export type RoleState = Record<string, Role>
+
+export interface RoleManagementState extends InitialStateManagement<Role, {}>{
+    roles:Role[];
+    roleToEdit?:Role
 }

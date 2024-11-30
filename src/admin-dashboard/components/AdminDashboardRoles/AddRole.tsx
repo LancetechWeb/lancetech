@@ -5,9 +5,9 @@ import axiosInstance from '../../../utils/auth/axiosInstance'
 import { LexicalEditorComponent } from '../../../utils/lexical'
 import { allToolbarIcons} from '../../../utils/lexical'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectEditRole } from '../../selectors/dashboard.selectors'
-import { setEditRole } from '../../reducers/dashboard.reducers'
 import { Role } from '../../../roles/types/roles.types'
+import { clearEditedState, setEditedState, setRoleToEdit } from '../../../roles/reducers/roles.reducers'
+import { selectEditedState, selectRoleToEdit } from '../../../roles/selectors/roles.selectors'
 
 const AddRole = ({
     role    
@@ -23,7 +23,8 @@ const AddRole = ({
     const [description, setDescription] = useState<string>(role?.description ?? "")
 
     // selectors
-    const editRole = useSelector(selectEditRole)
+    const roleToEdit = useSelector(selectRoleToEdit)
+    const editedState = useSelector(selectEditedState)
 
     const handleAddRole = () => {
         axiosInstance.post(
@@ -38,11 +39,18 @@ const AddRole = ({
     }
 
     const handleCancelRoleEdit = ()=>{
-        dispatch(setEditRole(undefined))
+        dispatch(setRoleToEdit(undefined))
     }
 
     const handleRoleUpdate = () =>{
-        
+        if(role)
+        axiosInstance.post(
+            `/roles/update/${role._id}`, 
+            editedState[role._id]
+        ).then(resp =>{
+            dispatch(setRoleToEdit(undefined))
+            dispatch(clearEditedState())
+        } )
     }
 
   return (
@@ -63,25 +71,49 @@ const AddRole = ({
                 id="outlined-basic" 
                 label="Title" 
                 variant="outlined" 
-                onChange={(e)=>setTitle(e.target.value)}
+                onChange={(e)=>{
+                    dispatch(setEditedState({
+                        id:role?._id ?? "", 
+                        field:{title:e.target.value}
+                    }))
+                    setTitle(e.target.value)
+                }}
                 sx={{width:"100%"}}
             />
             <TextField
                 value={rank}
                 label="Rank" 
-                onChange={(e)=>setRank(e.target.value)}
+                onChange={(e)=>{
+                    dispatch(setEditedState({
+                        id:role?._id ?? "", 
+                        field:{rank:e.target.value}
+                    }))
+                    setRank(e.target.value)}
+                }
                 sx={{width:"100%"}}
             />
             <TextField
                 value={remote}
                 label="Remote" 
-                onChange={(e)=>setRemote(e.target.value)}
+                onChange={(e)=>{
+                    dispatch(setEditedState({
+                        id:role?._id ?? "", 
+                        field:{remote:e.target.value}
+                    }))
+                    setRemote(e.target.value)
+                }}
                 sx={{width:"100%"}}
             />
             <LexicalEditorComponent 
                 value={description}
                 toolbarButtons={allToolbarIcons} 
-                onChange={(editorState:string)=>setDescription(editorState) }
+                onChange={(editorState:string)=>{
+                    dispatch(setEditedState({
+                        id:role?._id ?? "", 
+                        field:{description:editorState}
+                    }))
+                    setDescription(editorState) 
+                }}
             />
             <Button 
                 variant='contained' 
@@ -91,11 +123,11 @@ const AddRole = ({
                     py:2, 
                     background:COLORS.MainBlue
                 }}
-                onClick={editRole ? handleRoleUpdate : handleAddRole}
+                onClick={roleToEdit ? handleRoleUpdate : handleAddRole}
             >
-               {editRole ? "Update Role" : "Add Role"}
+               {roleToEdit ? "Update Role" : "Add Role"}
             </Button>
-            {editRole && <Button 
+            {roleToEdit && <Button 
                 variant='outlined' 
                 sx={{
                     width:"100%", 

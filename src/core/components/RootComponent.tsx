@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet, useBlocker } from 'react-router-dom'
 import { setPreviousPage } from '../reducers/coreSlice'
 import { useDispatch } from 'react-redux'
+import useAuthCheck from '../hooks/useAuthCheck'
 
 const RootComponent = () => {
     const dispatch = useDispatch()
@@ -12,6 +13,9 @@ const RootComponent = () => {
 
     return false
   })
+
+  // custom hooks
+  useAuthCheck()
 
   return (
     <Outlet/>

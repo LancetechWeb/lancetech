@@ -4,8 +4,9 @@ import RoleCard from '../../../roles/components/RoleCard'
 import { Role } from '../../../roles/types/roles.types'
 import SimpleDialog from '../../../core/components/SimpleDialog'
 import { useState } from 'react'
-import { setEditRole } from '../../reducers/dashboard.reducers'
 import { useDispatch } from 'react-redux'
+import { setRoleToEdit } from '../../../roles/reducers/roles.reducers'
+import axiosInstance from '../../../utils/auth/axiosInstance'
 
 const AdminRoleCard = ({
     role,
@@ -20,7 +21,7 @@ const AdminRoleCard = ({
     const [openDeleteRoleModal, setOpenDeleteRoleModal] = useState<boolean>(false)
 
     const onEdit =()=>{
-        dispatch(setEditRole(role))
+        dispatch(setRoleToEdit(role))
     }
 
     const onDelete =()=>{
@@ -29,6 +30,12 @@ const AdminRoleCard = ({
 
     const handleOnAcceptToDelete = () =>{
         // logic to send delete post request
+        axiosInstance.post(
+            `/roles/update/${role._id}`, 
+            {isActive:false}
+        ).then(resp =>{
+            setOpenDeleteRoleModal(false)
+        } )
     }
 
   return (

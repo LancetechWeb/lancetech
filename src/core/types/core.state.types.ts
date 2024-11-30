@@ -9,11 +9,11 @@ export interface User{
     createdAt: Date;
     updatedAt: Date;
     authorities: string[]
-  }
+}
   
 
-  export interface CoreStateType{
+export interface CoreStateType{
     previousPage:string;
     isAuthenticated?:boolean;
-    user?:User
+    user?:User;
 }

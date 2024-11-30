@@ -2,12 +2,11 @@ import { Box } from '@mui/material'
 import AddRole from './AddRole'
 import useGetRoles from '../../../core/hooks/useGetRoles'
 import { useSelector } from 'react-redux'
-import { selectRoles } from '../../../roles/selectors/roles.selectors'
+import { selectRoles, selectRoleToEdit } from '../../../roles/selectors/roles.selectors'
 import { COLORS } from '../../../core/styles/COLORS'
 import { useState } from 'react'
 import RoleDetailsDialog from './RoleDetailsDialog'
 import AdminRoleCard from './AdminRoleCard'
-import { selectEditRole } from '../../selectors/dashboard.selectors'
 
 const DashboardRolesComponent = () => {
 
@@ -17,7 +16,7 @@ const DashboardRolesComponent = () => {
 
   // selectors
   const roles = useSelector(selectRoles)
-  const editRole = useSelector(selectEditRole)
+  const roleToEdit = useSelector(selectRoleToEdit)
 
   // hooks
   useGetRoles()    
@@ -33,8 +32,8 @@ const DashboardRolesComponent = () => {
 
   return (
     <Box sx={{display:"flex", flexDirection:"column", justifyContent:"space-between", pt:2, gap:2, height:"85%",}}>
-        {!editRole && <AddRole/>}
-        {editRole && <AddRole role={editRole}/>}
+        {!roleToEdit && <AddRole/>}
+        {roleToEdit && <AddRole role={roleToEdit}/>}
         <Box sx={{ 
             display:"flex", 
             overflowX:"auto", 

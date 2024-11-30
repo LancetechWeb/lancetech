@@ -1,12 +1,23 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setIsAuthenticated, setUser } from '../reducers/coreSlice';
 import axiosInstance from '../../utils/auth/axiosInstance';
+import { selectIsAuthenticated, selectUser } from '../selectors/core.selectors';
+import { useNavigate } from 'react-router-dom';
 
 const useAuthCheck = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
- 
+  // selectors
+  const user = useSelector(selectUser);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+
+  if(
+    window.location.pathname.includes("admin/dashboard") &&
+    (!user || !isAuthenticated)
+  ) navigate('admin/login');
+
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -33,7 +44,9 @@ const useAuthCheck = () => {
     };
 
     checkAuth();
-  }, [dispatch]);
+
+   
+  }, [dispatch, navigate]);
 };
 
 export default useAuthCheck;
