@@ -6,7 +6,7 @@ import { LexicalEditorComponent } from '../../../utils/lexical'
 import { allToolbarIcons} from '../../../utils/lexical'
 import { useDispatch, useSelector } from 'react-redux'
 import { Role } from '../../../roles/types/roles.types'
-import { clearEditedState, setEditedState, setRoleToEdit } from '../../../roles/reducers/roles.reducers'
+import { addToCurrentState, clearEditedState, setEditedState, setRoleToEdit } from '../../../roles/reducers/roles.reducers'
 import { selectEditedState, selectRoleToEdit } from '../../../roles/selectors/roles.selectors'
 
 const AddRole = ({
@@ -50,6 +50,7 @@ const AddRole = ({
         ).then(resp =>{
             dispatch(setRoleToEdit(undefined))
             dispatch(clearEditedState())
+            dispatch(addToCurrentState({[resp.data?._id]:resp.data}))
         } )
     }
 

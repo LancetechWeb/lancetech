@@ -1,29 +1,32 @@
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate,  } from 'react-router-dom'
 import useAuthCheck from '../../core/hooks/useAuthCheck'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { selectIsAuthenticated } from '../../core/selectors/core.selectors'
+import AdminLogin from './AdminLogin'
 
 const AdminAuthWrapper = () => {
   const navigate = useNavigate();
-
 
    // selectors
    const isAuthenticated = useSelector(selectIsAuthenticated)
 
  
-   useEffect(()=>{
- 
+   useLayoutEffect(()=>{
+    console.log("...navigate to login in AdminAuthWrapper", isAuthenticated)
+    
      isAuthenticated === false &&  navigate('/admin/login') // Redirect to admin Login page
-    //  isAuthenticated &&  navigate('/admin/dashboard') // Redirect to admin Dashboard
    }, [isAuthenticated, navigate])
 
    //hooks
   useAuthCheck()
 
-  return(<>
-   <Outlet/>
-  </>)  
+  return(
+    <>
+      {isAuthenticated && <Outlet/>}
+      {isAuthenticated === false && <AdminLogin/>}
+    </>
+  )  
 }
 
 export default AdminAuthWrapper

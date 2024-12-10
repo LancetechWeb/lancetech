@@ -4,10 +4,14 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import SearchIcon from '@mui/icons-material/Search';
 import { debounce } from 'lodash';
 import { useState, useCallback } from 'react';
+import useGetRoles from '../hooks/useGetRoles';
 
 const RoleSearchComponent = () => {
   const {roleId} = useParams()
   const navigate = useNavigate()
+
+  // local state
+  const [searchString, setSearchString] = useState<string>('')
 
   const handleBack = () =>{
     navigate('/roles')
@@ -18,19 +22,21 @@ const RoleSearchComponent = () => {
   // Define the debounced function
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
-    debounce((query: string) => {
-      console.log('Search API call with:', query);
-      // Add API call or other side-effect logic here
-    }, 300),
+    debounce((searchValue: string) => {
+      console.log('Search API call with:', searchValue);
+      setSearchString(searchValue)
+    }, 500),
     []
   );
 
   // Handle input change
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    setSearchValue(query);
-    handleSearch(query);
+    const searchValue = event.target.value;
+    setSearchValue(searchValue);
+    handleSearch(searchValue);
   };
+
+  useGetRoles(searchString)
 
   return (
     <Box 

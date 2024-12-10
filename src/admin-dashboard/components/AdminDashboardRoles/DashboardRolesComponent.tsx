@@ -1,12 +1,12 @@
 import { Box } from '@mui/material'
 import AddRole from './AddRole'
-import useGetRoles from '../../../core/hooks/useGetRoles'
 import { useSelector } from 'react-redux'
 import { selectRoles, selectRoleToEdit } from '../../../roles/selectors/roles.selectors'
 import { COLORS } from '../../../core/styles/COLORS'
 import { useState } from 'react'
 import RoleDetailsDialog from './RoleDetailsDialog'
 import AdminRoleCard from './AdminRoleCard'
+import useGetRoles from '../../../roles/hooks/useGetRoles'
 
 const DashboardRolesComponent = () => {
 

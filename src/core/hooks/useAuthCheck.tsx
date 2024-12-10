@@ -1,23 +1,10 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setIsAuthenticated, setUser } from '../reducers/coreSlice';
 import axiosInstance from '../../utils/auth/axiosInstance';
-import { selectIsAuthenticated, selectUser } from '../selectors/core.selectors';
-import { useNavigate } from 'react-router-dom';
 
 const useAuthCheck = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  // selectors
-  const user = useSelector(selectUser);
-  const isAuthenticated = useSelector(selectIsAuthenticated);
-
-  if(
-    window.location.pathname.includes("admin/dashboard") &&
-    (!user || !isAuthenticated)
-  ) navigate('admin/login');
-
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -26,6 +13,8 @@ const useAuthCheck = () => {
           '/authenticate/check-auth', 
           {},
         ); // Endpoint to check authentication status
+
+        console.log("...running useAuthCheck", response.status)
 
         if (response.status === 200) {
           // User is authenticated
@@ -36,6 +25,7 @@ const useAuthCheck = () => {
           dispatch(setIsAuthenticated(false))
           dispatch(setUser(undefined))
         }
+
       } catch (error) {
         // Handle error or assume user is not authenticated
         dispatch(setIsAuthenticated(false))
@@ -46,7 +36,7 @@ const useAuthCheck = () => {
     checkAuth();
 
    
-  }, [dispatch, navigate]);
+  }, [dispatch]);
 };
 
 export default useAuthCheck;

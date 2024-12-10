@@ -1,10 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import { RolesStyle } from "../styles/rolesStyle";
 import { COLORS } from "../../core/styles/COLORS";
-import useGetRoles from "../../core/hooks/useGetRoles";
 import { Outlet } from "react-router-dom";
 import RoleSearchComponent from "./RoleSearchComponent";
 import RolesDisplay from "./RolesDisplay";
+import useGetRoles from "../hooks/useGetRoles";
 
 const RolesPage = () => {
   const { LightBackground } = COLORS;

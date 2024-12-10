@@ -14,6 +14,5 @@ export interface Role{
 export type RoleState = Record<string, Role>
 
 export interface RoleManagementState extends InitialStateManagement<Role, {}>{
-    roles:Role[];
     roleToEdit?:Role
 }
