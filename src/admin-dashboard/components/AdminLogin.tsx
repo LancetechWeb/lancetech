@@ -1,5 +1,5 @@
-import { Box, Button, TextField, Typography } from '@mui/material'
-import React, { useEffect, useRef, useState } from 'react'
+import { Box, Button, Typography } from '@mui/material'
+import React, { useEffect, useRef } from 'react'
 import axios from 'axios'
 import { textFieldStyles } from '../../core/styles/textField.styles'
 import { COLORS } from '../../core/styles/COLORS'
@@ -9,30 +9,18 @@ import Logo from '../../core/components/Logo'
 import { loginComponentStyles } from '../styles/admin.styles'
 import { useNavigate } from 'react-router-dom'
 import { getVariable } from '../../utils/misc/env.misc'
+import TextFieldComponent from '../../form-fields/components/TextFieldComponent'
+import { useForm } from 'react-hook-form'
+import { AdminLoginFormType } from '../types/dashboard.types'
 
 const AdminLogin = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const today = new Date()
 
-  // local state
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
-  const handleEmail =(e:React.ChangeEvent<HTMLInputElement>)=>{
-    setEmail(e.target.value)
-  }
+  const handleLogin = async (formValues:AdminLoginFormType) => {
   
-  const handlePassword =(e:React.ChangeEvent<HTMLInputElement>)=>{
-    setPassword(e.target.value)
-  }
-  const handleLogin = async (e: React.FormEvent) => {
-      e.preventDefault();
-  
-      const postData = {
-        email,
-        password
-      };
+      const postData = formValues
   
       try {
         const response = await axios.post(`${getVariable("BASE_URL")}/authenticate/sign-in`, postData,
@@ -57,8 +45,16 @@ const AdminLogin = () => {
       }
   };
 
+  // custom hooks
+  const { control, handleSubmit } = useForm<AdminLoginFormType>({
+    defaultValues: {
+      email:'',
+      password:''
+    },
+  });
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if(event.key === "Enter")handleLogin(event);
+    if(event.key === "Enter") handleSubmit(handleLogin)
   };
 
   const compRef = useRef<HTMLElement>()
@@ -76,46 +72,54 @@ const AdminLogin = () => {
     >
       <Box> <Logo noText/> </Box>
 
-      <Box sx={{ 
-        display:"flex", 
-        flexDirection:"column", 
-        alignItems:"center", 
-        justifyContent:"center", 
-        gap:3, 
-        py:10,
-        px:4,
-        border:`1px solid ${COLORS.MainBlue}`,
-        borderRadius:"5px",
-        width:"20%",
-        minWidth:"250px",
-        maxWidth:"380px"
-      }}>
-        <TextField 
-          id="outlined-basic" 
-          label="Email" 
-          variant="outlined" 
-          onChange={handleEmail}
+      <Box 
+        sx={{ 
+          display:"flex", 
+          flexDirection:"column", 
+          alignItems:"center", 
+          justifyContent:"center", 
+          gap:3, 
+          py:10,
+          px:4,
+          border:`1px solid ${COLORS.MainBlue}`,
+          borderRadius:"5px",
+          width:"20%",
+          minWidth:"250px",
+          maxWidth:"380px"
+        }}
+        component="form"
+        onSubmit={handleSubmit(handleLogin)}
+      >
+        <TextFieldComponent <AdminLoginFormType>
+          id="outlined-basic"
+          name='email'
+          label="Email"
+          variant="outlined"
+          control={control}
           InputLabelProps={{
-              style: { color: 'white' }, // Label color
+            style: { color: 'white' }, // Label color
           }}
           onKeyDown={handleKeyDown}
-          sx={textFieldStyles}
+          sx={textFieldStyles} 
+          rules={{required:"email is required"}}         
         />
 
-        <TextField 
+        <TextFieldComponent <AdminLoginFormType>
           id="outlined-basic" 
+          name='password'
           label="Password" 
           type='password'
           variant="outlined" 
-          onChange={handlePassword} 
+          control={control}
           InputLabelProps={{
             style: { color: 'white' }, // Label color
           }}
           onKeyDown={handleKeyDown}
           sx={textFieldStyles}
+          rules={{required:"email is required"}}         
         />
 
-        <Button variant="contained" onClick={handleLogin} sx={{width:"100%", mt:5, py:2}}>
+        <Button variant="contained" type='submit' sx={{width:"100%", mt:5, py:2}}>
           Login
         </Button>
       </Box>

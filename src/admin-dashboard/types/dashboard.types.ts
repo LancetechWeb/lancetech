@@ -28,4 +28,7 @@ export const DashboardMenuObject:Record<DashboardMenu, {menu:DashboardMenu, icon
     }
 }
 
+export interface AdminLoginFormType {email:string; password:string}
+
+
 export const DashboardMenus = Object.values(DashboardMenuObject)
