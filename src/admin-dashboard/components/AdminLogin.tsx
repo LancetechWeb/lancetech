@@ -1,10 +1,10 @@
 import { Box, Button, Typography } from '@mui/material'
 import React, { useEffect, useRef } from 'react'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { textFieldStyles } from '../../core/styles/textField.styles'
 import { COLORS } from '../../core/styles/COLORS'
 import { useDispatch } from 'react-redux'
-import { setIsAuthenticated, setUser } from '../../core/reducers/coreSlice'
+import { setIsAuthenticated, setSnackbar, setUser } from '../../core/reducers/coreSlice'
 import Logo from '../../core/components/Logo'
 import { loginComponentStyles } from '../styles/admin.styles'
 import { useNavigate } from 'react-router-dom'
@@ -36,12 +36,14 @@ const AdminLogin = () => {
         if(response.status === 200){
           dispatch(setIsAuthenticated(true))
           dispatch(setUser(response.data))
+          dispatch(setSnackbar({type:"success", message:"logged in successfully"}))
           navigate('/admin/dashboard')
         }
-
-        // setData(response.data)
       } catch (error) {
-        console.error("error", error)
+        if (error instanceof AxiosError) 
+          dispatch(setSnackbar({type:"error", message:`oops! there was an error signing in: ${error.message}`}))
+        else 
+          dispatch(setSnackbar({type:"error", message:`oops! an unknownn error occurred: ${error}`}))
       }
   };
 
@@ -116,7 +118,7 @@ const AdminLogin = () => {
           }}
           onKeyDown={handleKeyDown}
           sx={textFieldStyles}
-          rules={{required:"email is required"}}         
+          rules={{required:"password is required"}}         
         />
 
         <Button variant="contained" type='submit' sx={{width:"100%", mt:5, py:2}}>

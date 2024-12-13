@@ -10,7 +10,7 @@ export const isProduction = () => process.env.NODE_ENV === "production";
 export const isDevelopment = () => process.env.NODE_ENV === "development";
 export const isTest = () => process.env.NODE_ENV === "test";
 
-export const getVariable = (key:string) =>{
+export const getVariable = (key:string):string =>{
     let newKey:string = ''
 
     switch(currentEnvironment){
@@ -29,7 +29,9 @@ export const getVariable = (key:string) =>{
     const value = process.env[newKey];
 
     if (!value) {
-      throw new Error(`Environment variable ${key} is missing`);
+      console.error(`Environment variable ${key} is missing`);
+
+      return '';
     }
 
     return value;

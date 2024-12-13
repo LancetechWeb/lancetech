@@ -3,6 +3,7 @@ import { Outlet, useBlocker } from 'react-router-dom'
 import { setPreviousPage } from '../reducers/coreSlice'
 import { useDispatch } from 'react-redux'
 import useAuthCheck from '../hooks/useAuthCheck'
+import SnackbarComponent from './Snackbar'
 
 const RootComponent = () => {
     const dispatch = useDispatch()
@@ -18,7 +19,10 @@ const RootComponent = () => {
   useAuthCheck()
 
   return (
-    <Outlet/>
+    <>
+      <Outlet/>
+      <SnackbarComponent/>
+    </>
   )
 }
 

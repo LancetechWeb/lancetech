@@ -16,4 +16,5 @@ export interface CoreStateType{
     previousPage:string;
     isAuthenticated?:boolean;
     user?:User;
+    snackbar?:{type:"error"|"success", message:string}
 }
