@@ -1,6 +1,6 @@
 import { COLORS } from "./COLORS";
 
-export const textFieldStyles =  {
+export const darkBackgroundTextFieldStyles =( {
     input: {
       color: 'white', // Text color
     },
@@ -21,4 +21,4 @@ export const textFieldStyles =  {
 
     width:"100%"
 
-  }
+  })

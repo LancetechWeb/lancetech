@@ -15,11 +15,13 @@ export const urlHasProtocol = (url: string): boolean => {
 };
   
 /**
- * checks that a url is valid
+ * checks that a url has protocol
+ * if it does not, add it
+ * then validate url with protocol if it is valid url
  * @param url 
  * @returns boolean
  */
-export const validateUrl = (url: string): string|null => {
+export const validateAndCorrectUrlWithProtocol = (url: string): string|null => {
     let updatedURL = url
 
     const options:IsURLOptions = {
@@ -34,4 +36,19 @@ export const validateUrl = (url: string): string|null => {
     if(isURL(updatedURL, options)) return updatedURL;
 
     return null
-  };
+};
+
+/**
+ * checks that a url is valid with or without the protocol
+ * @param value 
+ * @returns 
+ */
+export const isValidURL = (value:string):boolean =>{
+  const options:IsURLOptions = {
+    require_protocol: false, // Ensure protocols like http/https
+    require_valid_protocol: false, // Validate supported protocols
+    allow_underscores: false,
+  }
+
+  return isURL(value, options)
+}

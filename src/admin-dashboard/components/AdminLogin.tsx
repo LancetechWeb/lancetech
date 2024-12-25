@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from '@mui/material'
 import React, { useEffect, useRef } from 'react'
 import axios, { AxiosError } from 'axios'
-import { textFieldStyles } from '../../core/styles/textField.styles'
+import { darkBackgroundTextFieldStyles } from '../../core/styles/textField.styles'
 import { COLORS } from '../../core/styles/COLORS'
 import { useDispatch } from 'react-redux'
 import { setIsAuthenticated, setSnackbar, setUser } from '../../core/reducers/coreSlice'
@@ -102,7 +102,7 @@ const AdminLogin = () => {
             style: { color: 'white' }, // Label color
           }}
           onKeyDown={handleKeyDown}
-          sx={textFieldStyles} 
+          sx={darkBackgroundTextFieldStyles} 
           rules={{required:"email is required"}}         
         />
 
@@ -117,7 +117,7 @@ const AdminLogin = () => {
             style: { color: 'white' }, // Label color
           }}
           onKeyDown={handleKeyDown}
-          sx={textFieldStyles}
+          sx={darkBackgroundTextFieldStyles}
           rules={{required:"password is required"}}         
         />
 

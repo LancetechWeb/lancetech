@@ -11,7 +11,7 @@ import { Box, Popper, TextField, Typography, useTheme } from '@mui/material';
 import { $getSelection, $isRangeSelection } from 'lexical';
 import React, { useEffect, useState } from 'react';
 import type { MiscFormat } from '../types/toolbar.types';
-import { validateUrl } from '../../string.helpers';
+import { validateAndCorrectUrlWithProtocol } from '../../string.helpers';
 
 const LinkToolbarPlugin = ({
   format,
@@ -64,7 +64,7 @@ const LinkToolbarPlugin = ({
           target: '_blank',
           rel: 'noopener noreferrer',
         };
-        const validatedURL = validateUrl(nodeURL);
+        const validatedURL = validateAndCorrectUrlWithProtocol(nodeURL);
         const urlToUse = validatedURL ? validatedURL : nodeURL;
 
         editor.dispatchCommand(TOGGLE_LINK_COMMAND, {

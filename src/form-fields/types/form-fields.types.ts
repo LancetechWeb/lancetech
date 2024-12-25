@@ -8,7 +8,10 @@ import type {
   FieldValues,
   Path,
   RegisterOptions,
+  UseFormReturn,
 } from 'react-hook-form';
+import { FileType } from './fileUpload.types';
+import { MuiTelInputProps } from 'mui-tel-input';
 
 /**
  * A generic type for React Hook Form rules.
@@ -41,4 +44,25 @@ export interface TimeRangeComponentProps<T extends FieldValues>
     Omit<MultiInputTimeRangeFieldProps<Date>, 'onChange' | 'name'> {
   onChange: (newTimeRange: DateRange<Date>) => void;
   inputProps: TextFieldProps;
+}
+
+// AutocompleteComponent prop type
+export interface AutoCompleteComponentProps<T extends FieldValues>
+  extends FieldValidationProps<T> {
+  disabled?: boolean;
+  onChange?: (newVal: string | null) => void;
+  options: string[];
+  inputProps: TextFieldProps;
+}
+
+// TelephoneInput prop type
+export type TelephoneInputComponentProps<T extends FieldValues> =
+   FieldValidationProps<T> & MuiTelInputProps  
+
+export interface FileUploadProps<T extends FieldValues> 
+  extends FieldValidationProps<T> {
+  multiple?: boolean; // Determines if multiple files can be uploaded
+  allowedFileTypes:FileType[]
+  setValue:(name:Path<T>, value:Record<string, File>|undefined)=>void
+  trigger: UseFormReturn<T>['trigger']
 }

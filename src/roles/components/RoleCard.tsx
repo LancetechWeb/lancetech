@@ -3,8 +3,10 @@ import { COLORS } from '../../core/styles/COLORS';
 import { Role } from '../types/roles.types';
 import { getDayHoursAgo } from '../../utils/date.helpers';
 import { FONTS } from '../../core/styles/FONTS';
+import { useParams } from 'react-router-dom';
 
 const RoleCard = ({role, onClick}:{role:Role; onClick:(roleId:string)=> void}) => {
+    const {roleId} = useParams()
 
     const {_id, title, rank, remote} = role
 
@@ -16,7 +18,9 @@ const RoleCard = ({role, onClick}:{role:Role; onClick:(roleId:string)=> void}) =
             flexShrink: 0, // Prevent card from shrinking
             cursor:"pointer",
             p:2,
-            position:"relative"
+            position:"relative",
+            ...(roleId && roleId === _id && {border:`2px solid ${COLORS.LightBlue}`}),
+            boxShadow:"none"
         }}
         onClick={()=> onClick(_id)}
     >
