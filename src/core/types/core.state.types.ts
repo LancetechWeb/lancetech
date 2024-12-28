@@ -1,3 +1,4 @@
+
 export interface User{
     id:string;
     firstName:string;
@@ -18,3 +19,13 @@ export interface CoreStateType{
     user?:User;
     snackbar?:{type:"error"|"success", message:string}
 }
+
+
+export interface UIInitialStateType {
+    scrollIcon: boolean;
+    openMenu: boolean;
+    hasNavbar: boolean;
+    hasFooter: boolean;
+    navFixed: boolean;
+    navbarColor?: string;
+  }

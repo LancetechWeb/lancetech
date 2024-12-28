@@ -132,10 +132,7 @@ const AdminLogin = () => {
             bottom:50,
             color:COLORS.LightFont
           }}>
-        <Typography 
-          variant='caption'
->
-
+        <Typography variant='caption'>
           © {today.getFullYear()} Lancetech Services, Ltd. All rights reserved.
         </Typography>
       </Box>

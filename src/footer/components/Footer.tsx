@@ -1,7 +1,16 @@
 import { Box } from '@mui/material';
 import FooterStyle from '../styles/FooterStyle';
+import { useSelector } from 'react-redux';
+import { selectHasFooter } from '../../core/selectors/ui.selectors';
+
 
 const Footer = () => {
+
+    // selectors
+    const hasFooter = useSelector(selectHasFooter);
+
+    if(!hasFooter)return null
+
   return (
     <FooterStyle>
       <Box sx={{display:"flex", gap:"5rem"}}>

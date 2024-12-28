@@ -1,22 +1,26 @@
 import { Box, Icon, IconButton } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setOpenMenu } from '../../core/reducers/uiSlice';
 import { COLORS } from '../../core/styles/COLORS';
 import Logo from '../../core/components/Logo';
 import NavStyle from '../styles/nav.styles';
 import NavButtonComponent from './NavButtonComponent';
+import { selectNavbarColor } from '../../core/selectors/ui.selectors';
 
 const NavBar = ({ navfixed }:{navfixed:boolean}) => {
   const dispatch = useDispatch();
 
-  const { MainBlue } = COLORS;
+  const { MainBlue,  } = COLORS;
+
+  const navbarColor = useSelector(selectNavbarColor);
+
 
   const handleOpenSideMenu = () => {
     dispatch(setOpenMenu(true));
   };
 
   return (
-    <NavStyle $navfixed={navfixed}>
+    <NavStyle $navfixed={navfixed} style={{backgroundColor:navbarColor}}>
       <Box className="webNavLogo">
         <Logo />
       </Box>

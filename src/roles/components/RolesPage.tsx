@@ -25,7 +25,7 @@ const RolesPage = () => {
   useGetRoles()    
 
   return (
-    <RolesStyle style={{ backgroundColor: LightBackground }}>
+    <RolesStyle style={{ backgroundColor: LightBackground,  }}>
       {!applyParamsValue && 
         <Box className="rolesHeader">
           <Typography variant="h5" sx={{ fontFamily: 'inherit', textAlign: 'center' }}>
@@ -47,7 +47,9 @@ const RolesPage = () => {
       }
 
       {applyParamsValue && role &&
-        <RoleApplicationForm role={role}/>
+        <Box sx={{py:15,  mx:"auto",  maxWidth:"1920px"}}>
+          <RoleApplicationForm role={role}/>
+        </Box>
       }
     </RolesStyle>
   );
