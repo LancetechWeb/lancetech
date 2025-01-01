@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import axiosInstance from '../../utils/auth/axiosInstance';
+import  { axiosWrapper } from '../../utils/auth/axiosInstance';
 import { setCurrentState,  } from '../../roles/reducers/roles.reducers';
 import { Role } from '../../roles/types/roles.types';
 import { buildRolesSearchQueryParams } from '../helpers/roles.helpers';
@@ -12,24 +12,30 @@ const useGetRoles = (searchString?: string, page?: number, pageSize?: number, ) 
       const roleQueryParams = buildRolesSearchQueryParams(searchString, page, pageSize, );
 
       const getRoles = async () => {
-        try {
-          const response = await axiosInstance.get(`/roles/get-roles?${roleQueryParams}`, ); 
-          const data:Role[] = response.data.results;    
-         
-          const dataDictionary =  data.reduce((accumulator:Record<string, Role>, currentValue )=>{
-              accumulator[currentValue._id] = currentValue
-              
-              return accumulator;
-          }, {})
+          const {data} = await axiosWrapper({url:`/roles/get-roles?${roleQueryParams}`});
 
-          dispatch(setCurrentState(dataDictionary ))
-
-          console.log("...fetching roles")
+          if(data){
+            const roles:Role[] = data.results;  
+            
+            //      [{
+            //     _id:"344342",
+            //     title:"Hello Bobo",
+            //     rank:"Highest rank",
+            //     remote:"anywhere in the world",
+            //     description:"most flexible job in the world",
+            //     isActive: true,
+            //     createdAt: "",
+            //     updatedAt: ""
+            // }]
           
-        } catch (error) {
-          // Handle error
-          console.error(error)
-        }
+            const dataDictionary =  roles.reduce((accumulator:Record<string, Role>, currentValue )=>{
+                accumulator[currentValue._id] = currentValue
+                
+                return accumulator;
+            }, {})
+
+            dispatch(setCurrentState(dataDictionary ))
+          }
       };
   
       getRoles();
@@ -37,3 +43,5 @@ const useGetRoles = (searchString?: string, page?: number, pageSize?: number, ) 
 }
 
 export default useGetRoles
+
+

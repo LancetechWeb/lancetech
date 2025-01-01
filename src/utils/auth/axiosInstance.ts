@@ -1,5 +1,4 @@
-// axiosInstance.js
-import axios from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { store } from '../../store';
 import { setIsAuthenticated, setUser } from '../../core/reducers/coreSlice';
 import { getVariable } from '../misc/env.misc';
@@ -47,11 +46,31 @@ axiosInstance.interceptors.response.use(
         router.navigate('/admin/login')
     }
 
+    console.log("...can see error")
+
     console.error(error.message)
     
     // Prevent propagation of the error
-    return error; // Simply return to handle the error within the interceptor
+    throw error; // Simply return to handle the error within the interceptor
   }
 );
 
-export default axiosInstance;
+export const axiosWrapper = async (config: AxiosRequestConfig): Promise<{ data?: any; error?: AxiosError|Error }> => {
+  try {
+    const response:AxiosResponse = await axiosInstance.request(config);
+    return { data: response.data, error: undefined };
+  } catch (error) {
+    console.error("error", error)
+    
+    if(error){
+      if (error instanceof AxiosError)  
+        return {data: undefined, error:{...error, message:error?.response?.data?.message ?? error.message}};
+
+      if(error instanceof Error) return { data: undefined, error }
+    }
+
+    return { data: undefined, error:undefined }
+  }
+};
+
+// export default axiosInstance;

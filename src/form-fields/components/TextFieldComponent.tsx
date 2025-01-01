@@ -22,7 +22,7 @@ const TextFieldComponent = <T extends FieldValues>(
 
             // onChange for validation
             field.onChange(e.target.value);
-          }}
+          }}         
           error={!!error}
           helperText={
             error?.message && (

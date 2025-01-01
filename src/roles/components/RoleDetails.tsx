@@ -45,10 +45,10 @@ const RoleDetails = ({id}:{id?:string}) => {
             }}
         >
             <Box sx={{display:"flex", flexDirection:"column", gap:3, alignItems:isMobile ? "start" : "center"}}>
-                <Typography variant='h3'>{role.title}</Typography>    
+                <Typography variant='h4'>{role.title}</Typography>    
                 <Box sx={{display:"flex"}}>
-                    <LocationOnOutlinedIcon/> 
-                    <Typography sx={{alignSelf:"center"}}> 
+                    <LocationOnOutlinedIcon sx={{color:COLORS.LightBlue}}/> 
+                    <Typography sx={{alignSelf:"center", color:COLORS.LightBlue}}> 
                         {role.remote}
                     </Typography>
                 </Box>

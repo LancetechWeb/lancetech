@@ -15,7 +15,7 @@ const PortfolioFields = ({
   // useFieldArray to manage dynamic fields
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'portfolioLinks', // Array of portfolio links
+    name: 'portfolioLinks',
   });
 
   const handleDelete = (fieldIndex: number): void => remove(fieldIndex);
@@ -23,7 +23,7 @@ const PortfolioFields = ({
   const handleAddLink = () => append({ id: nanoid(), url: '' });
 
   return (
-    <List>
+    <List sx={{px:0}}>
       {
         fields.map((field, index) => (
           <ListItem key={field.id}>
@@ -33,11 +33,11 @@ const PortfolioFields = ({
               variant="outlined"
               control={control}
               InputLabelProps={{
-                style: { color: 'black' }, // Label color
+                sx: { color: 'black' }, // Label color
               }}
               sx={{
                 width: "100%", 
-                ...(index === 0 && {mr: 7}) // Add margin to the first field
+                ...(index === 0 && {mr: 6}) // Add margin to the first field
               }} 
               rules={{
                 validate: (value) => {
@@ -51,7 +51,7 @@ const PortfolioFields = ({
             />
             {index !== 0 && (
               <Tooltip title='delete'>
-                <IconButton sx={{ ml: 2, color: COLORS.LightBlue }} onClick={() => handleDelete(index)}>
+                <IconButton sx={{ ml: 1, color: COLORS.LightBlue }} onClick={() => handleDelete(index)}>
                   <Icon>highlight_off</Icon>
                 </IconButton>
               </Tooltip>
@@ -59,7 +59,18 @@ const PortfolioFields = ({
           </ListItem>
         ))
       }
-      <Button variant='outlined' sx={{ ml: 2 }} onClick={handleAddLink}>Add Link</Button>
+      <Button 
+        variant='outlined' 
+        sx={{ 
+          ml: 2,
+          p:1, 
+          color:COLORS.LightBlue, 
+          borderColor:COLORS.LightBlue         
+        }} 
+        onClick={handleAddLink}
+      >
+        Add Link
+      </Button>
     </List>
   );
 }

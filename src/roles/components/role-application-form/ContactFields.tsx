@@ -4,6 +4,7 @@ import { RoleApplicationFormFields } from '../../types/roles.types'
 import { Control } from 'react-hook-form'
 import useGetCountries from '../../../form-fields/hooks/useGetCountries'
 import TelephoneInputComponent from '../../../form-fields/components/TelephoneInputComponent'
+import Label from '../../../core/components/Label'
 
 const ContactFields = (
 {
@@ -18,7 +19,7 @@ const ContactFields = (
          <TextFieldComponent <RoleApplicationFormFields>
             id="email"
             name='email'
-            label="Email"
+            label={<Label title='Email' required/>}
             variant="outlined"
             control={control}
             InputLabelProps={{
@@ -30,7 +31,7 @@ const ContactFields = (
         <TextFieldComponent <RoleApplicationFormFields>
             id="firstName"
             name='firstName'
-            label="First Name"
+            label={<Label title='First Name ' required/>}
             variant="outlined"
             control={control}
             InputLabelProps={{
@@ -42,7 +43,7 @@ const ContactFields = (
         <TextFieldComponent <RoleApplicationFormFields>
             id="lastName"
             name='lastName'
-            label="Last Name"
+            label={<Label title='Last Name ' required/>}
             variant="outlined"
             control={control}
             InputLabelProps={{
@@ -53,7 +54,7 @@ const ContactFields = (
         />
         <TelephoneInputComponent <RoleApplicationFormFields>
             name='phoneNumber'
-            label="Phone Number"
+            label={<Label title='Phone Number' required/>}
             variant="outlined"
             control={control}
             InputLabelProps={{
@@ -65,11 +66,11 @@ const ContactFields = (
         <AutoCompleteComponent <RoleApplicationFormFields>
             control={control}
             data-testid="country"
-            rules={{ required: `absence code is required` }}
+            rules={{ required: `country is required` }}
             options={countries}
             name="country"
             inputProps={{
-                label: 'Country',
+                label:(<Label title='Country' required/>),                
                 sx: {
                     '& .MuiOutlinedInput-root': {
                         borderRadius: '5px',
@@ -80,7 +81,7 @@ const ContactFields = (
         <TextFieldComponent <RoleApplicationFormFields>
             id="outlined-basic"
             name='state'
-            label="State or Region"
+            label={<Label title='State' required/>}
             variant="outlined"
             control={control}
             InputLabelProps={{
@@ -92,7 +93,7 @@ const ContactFields = (
         <TextFieldComponent <RoleApplicationFormFields>
             id="outlined-basic"
             name='city'
-            label="City"
+            label={<Label title='City' required/>}
             variant="outlined"
             control={control}
             InputLabelProps={{

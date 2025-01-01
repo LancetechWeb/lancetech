@@ -1,13 +1,14 @@
 import { Box, TextField, Button } from '@mui/material'
 import { useState } from 'react'
 import { COLORS } from '../../../core/styles/COLORS'
-import axiosInstance from '../../../utils/auth/axiosInstance'
+import { axiosWrapper } from '../../../utils/auth/axiosInstance'
 import { LexicalEditorComponent } from '../../../utils/lexical'
 import { allToolbarIcons} from '../../../utils/lexical'
 import { useDispatch, useSelector } from 'react-redux'
 import { Role } from '../../../roles/types/roles.types'
 import { addToCurrentState, clearEditedState, setEditedState, setRoleToEdit } from '../../../roles/reducers/roles.reducers'
 import { selectEditedState, selectRoleToEdit } from '../../../roles/selectors/roles.selectors'
+import { setSnackbar } from '../../../core/reducers/coreSlice'
 
 const AddRole = ({
     role    
@@ -26,32 +27,39 @@ const AddRole = ({
     const roleToEdit = useSelector(selectRoleToEdit)
     const editedState = useSelector(selectEditedState)
 
-    const handleAddRole = () => {
-        axiosInstance.post(
-            '/roles/create-role', 
-            {title, rank, remote, description}
-        ).then(resp =>{
-            setTitle("")
-            setRank("")
-            setRemote("")
-            setDescription("")
-        } )
+    const handleAddRole = async () => {
+        const {error, data} = 
+            await axiosWrapper({method:'POST', url:'/roles/create-role', data:{title, rank, remote, description}})
+            
+            if(data) {
+                setTitle("")
+                setRank("")
+                setRemote("")
+                setDescription("")
+                dispatch(setSnackbar({type:"success", message:"Role added successfully!"}))    
+            }
+
+            if(error) dispatch(setSnackbar({type:"error", message:`oops! there was an error: ${error.message}`})) 
     }
 
     const handleCancelRoleEdit = ()=>{
         dispatch(setRoleToEdit(undefined))
     }
 
-    const handleRoleUpdate = () =>{
-        if(role)
-        axiosInstance.post(
-            `/roles/update/${role._id}`, 
-            editedState[role._id]
-        ).then(resp =>{
-            dispatch(setRoleToEdit(undefined))
-            dispatch(clearEditedState())
-            dispatch(addToCurrentState({[resp.data?._id]:resp.data}))
-        } )
+    const handleRoleUpdate = async() =>{        
+        if(role){
+            const {error, data} = 
+                await axiosWrapper({method:'POST', url:`/roles/update/${role._id}`, data:editedState[role._id]})
+            
+            if(data) {
+                dispatch(setRoleToEdit(undefined))
+                dispatch(clearEditedState())
+                dispatch(addToCurrentState({[data?._id]:data}))
+                dispatch(setSnackbar({type:"success", message:"Role updated successfully!"}))    
+            }
+
+            if(error) dispatch(setSnackbar({type:"error", message:`oops! there was an error: ${error.message}`}))        
+        }
     }
 
   return (

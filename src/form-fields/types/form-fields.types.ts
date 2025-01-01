@@ -63,6 +63,6 @@ export interface FileUploadProps<T extends FieldValues>
   extends FieldValidationProps<T> {
   multiple?: boolean; // Determines if multiple files can be uploaded
   allowedFileTypes:FileType[]
-  setValue:(name:Path<T>, value:Record<string, File>|undefined)=>void
+  setValue:(name:Path<T>, value: File[]|undefined)=>void
   trigger: UseFormReturn<T>['trigger']
 }

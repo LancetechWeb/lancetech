@@ -13,8 +13,8 @@ import { COLORS } from '../../core/styles/COLORS';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAuthenticated, selectUser } from '../../core/selectors/core.selectors';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../../utils/auth/axiosInstance';
-import { setIsAuthenticated, setUser } from '../../core/reducers/coreSlice';
+import { axiosWrapper } from '../../utils/auth/axiosInstance';
+import { setIsAuthenticated, setSnackbar, setUser } from '../../core/reducers/coreSlice';
 import { setOpenMenu } from '../../core/reducers/uiSlice';
 import { getUserInitials } from '../helpers/navbar.helpers';
 
@@ -38,18 +38,20 @@ const LoginMenu = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+   
   // logout
-  const handleSignOut = () => 
-    axiosInstance.post(
-      '/authenticate/sign-out', 
-      {},
-    ).then(resp => {
+  const handleSignOut = async () => {
+    const {data, error} = await axiosWrapper({method:"POST", url:'/authenticate/sign-out', data:{}});
+
+    if(data) {
       setAnchorEl(null)
       dispatch(setIsAuthenticated(false))
       dispatch(setUser(undefined))
-    }
-    ).catch(error => console.error("error", error))
+      dispatch(setSnackbar({type:"success", message:"Application sent successfully"})) 
+    };
+
+    if(error) dispatch(setSnackbar({type:"error", message:`oops! there was an error: ${error.message}`})) 
+  }
   
   const handleProfileMenu = () =>{
     handleClose();

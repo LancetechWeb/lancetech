@@ -1,36 +1,29 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setIsAuthenticated, setUser } from '../reducers/coreSlice';
-import axiosInstance from '../../utils/auth/axiosInstance';
+import { setIsAuthenticated, setSnackbar, setUser } from '../reducers/coreSlice';
+import { axiosWrapper } from '../../utils/auth/axiosInstance';
+import { User } from '../types/core.state.types';
 
 const useAuthCheck = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     const checkAuth = async () => {
-      try {
-        const response = await axiosInstance.post(
-          '/authenticate/check-auth', 
-          {},
-        ); // Endpoint to check authentication status
+        const {data, error} = await axiosWrapper({method:'POST', url:'/authenticate/check-auth', data:{}});
+        const user:User|undefined = data;
 
-        console.log("...running useAuthCheck", response.status)
-
-        if (response.status === 200) {
+        if (user) {
           // User is authenticated
           dispatch(setIsAuthenticated(true))
-          dispatch(setUser(response.data))
-        } else {
-          // User is not authenticated
-          dispatch(setIsAuthenticated(false))
-          dispatch(setUser(undefined))
-        }
-
-      } catch (error) {
-        // Handle error or assume user is not authenticated
+          dispatch(setUser(data))
+          dispatch(setSnackbar({type:"success", message:`${user.lastName},${user.firstName} is authenticated`})) 
+        } 
+        if(error) {
+          // Handle error or assume user is not authenticated
         dispatch(setIsAuthenticated(false))
         dispatch(setUser(undefined))
-      }
+        dispatch(setSnackbar({type:"error", message:`Not authenticated!`})) 
+        }    
     };
 
     checkAuth();

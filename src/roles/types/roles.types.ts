@@ -17,10 +17,16 @@ export interface RoleManagementState extends InitialStateManagement<Role, {}>{
     roleToEdit?:Role
 }
 
+export const roleFormSteps = [
+    {id:"resume", name:"Resume"}, 
+    {id:"contactInformation", name:"Contact Information"}, 
+    {id:"additionalDocuments", name:"Additional Documents"},
+    {id:"legalInformation", name:"Legal Information"}
+]
 
 export type RoleApplicationFormFields = {
-    portfolioLinks: {id:string, url:string}[];
-    resume?: Record<string, File>;
+    portfolioLinks?: {id:string, url:string}[];
+    resume: File[];
     email: string;
     firstName: string;
     lastName: string;
@@ -29,5 +35,10 @@ export type RoleApplicationFormFields = {
     state: string;
     city: string;
     legalWorkPermit: string;
-    additionalDocuments?: Record<string, File>;
+    additionalDocuments?: File[];
 }; 
+
+export interface RoleApplication extends RoleApplicationFormFields{
+    id:string;
+    roleId:string
+}

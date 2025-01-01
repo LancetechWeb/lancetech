@@ -6,7 +6,8 @@ import SimpleDialog from '../../../core/components/SimpleDialog'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setRoleToEdit } from '../../../roles/reducers/roles.reducers'
-import axiosInstance from '../../../utils/auth/axiosInstance'
+import { axiosWrapper } from '../../../utils/auth/axiosInstance'
+import { setSnackbar } from '../../../core/reducers/coreSlice'
 
 const AdminRoleCard = ({
     role,
@@ -28,14 +29,16 @@ const AdminRoleCard = ({
         setOpenDeleteRoleModal(true)
     }
 
-    const handleOnAcceptToDelete = () =>{
+    const handleOnAcceptToDelete = async () =>{
         // logic to send delete post request
-        axiosInstance.post(
-            `/roles/update/${role._id}`, 
-            {isActive:false}
-        ).then(resp =>{
-            setOpenDeleteRoleModal(false)
-        } )
+        const {data, error} = await axiosWrapper({method:'POST', url:'/authenticate/sign-out', data:{}});
+
+        if(data){
+          setOpenDeleteRoleModal(false)
+          dispatch(setSnackbar({type:"success", message:"role deleted successfully!"}))   
+        } 
+
+        if(error) dispatch(setSnackbar({type:"error", message:`error logging out ${error.message}`})) 
     }
 
   return (

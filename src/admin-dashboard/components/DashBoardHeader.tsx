@@ -2,8 +2,8 @@ import { Box, Button, Icon, IconButton, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setOpenDashboardMenu } from '../reducers/dashboard.reducers'
 import { selectOpenDashboardMenu } from '../selectors/dashboard.selectors'
-import { setIsAuthenticated, setUser } from '../../core/reducers/coreSlice'
-import axiosInstance from '../../utils/auth/axiosInstance'
+import { setIsAuthenticated, setSnackbar, setUser } from '../../core/reducers/coreSlice'
+import { axiosWrapper } from '../../utils/auth/axiosInstance'
 import { selectUser } from '../../core/selectors/core.selectors'
 import { getUserInitials } from '../../navbar/helpers/navbar.helpers'
 import { COLORS } from '../../core/styles/COLORS'
@@ -20,15 +20,16 @@ const DashBoardHeader = () => {
   }
 
    // logout
-   const handleSignOut = () => 
-    axiosInstance.post(
-      '/authenticate/sign-out', 
-      {},
-    ).then(resp => {
+  const handleSignOut = async () => {
+    const {data, error} = await axiosWrapper({method:'POST', url:'/authenticate/sign-out', data:{}});
+
+    if(data){
       dispatch(setIsAuthenticated(false))
       dispatch(setUser(undefined))
-    }
-    ).catch(error => console.error("error", error))
+      dispatch(setSnackbar({type:"success", message:"logged out successfully!"}))   
+    } 
+    if(error) dispatch(setSnackbar({type:"error", message:`error logging out ${error.message}`})) 
+  }
 
   return (
     <Box sx={{p:2, display:"flex", alignItems:"center", justifyContent:"space-between", height:"10%", boxSizing:"border-box"}}>

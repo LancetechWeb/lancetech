@@ -26,7 +26,7 @@ export const StepProvider = ({ children }: { children: ReactNode }) => {
     setActiveStep(id);
 
      // Re-enable scroll detection after a delay
-     setTimeout(() => setIsManualScroll(false), 500); // Match the smooth scrolling duration
+     setTimeout(() => setIsManualScroll(false), 800); // Match the smooth scrolling duration
 };
 
   // Update active step on scroll
