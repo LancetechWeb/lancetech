@@ -47,7 +47,7 @@ const LoginMenu = () => {
       setAnchorEl(null)
       dispatch(setIsAuthenticated(false))
       dispatch(setUser(undefined))
-      dispatch(setSnackbar({type:"success", message:"Application sent successfully"})) 
+      dispatch(setSnackbar({type:"success", message:"Logged out successfully"})) 
     };
 
     if(error) dispatch(setSnackbar({type:"error", message:`oops! there was an error: ${error.message}`})) 

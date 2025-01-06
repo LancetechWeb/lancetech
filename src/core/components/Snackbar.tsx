@@ -24,7 +24,7 @@ const SnackbarComponent = () => {
               open
               autoHideDuration={3000} // Automatically hide after 6 seconds
               onClose={onClose}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} // Positioning of the Snackbar
+              anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Positioning of the Snackbar
             >
               <Alert onClose={onClose} severity={type} sx={{ width: '100%' }}>
                 {message}

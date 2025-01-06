@@ -41,7 +41,7 @@ const AdminLogin = () => {
         }
       } catch (error) {
         if (error instanceof AxiosError) 
-          dispatch(setSnackbar({type:"error", message:`oops! there was an error signing in: ${error.message}`}))
+          dispatch(setSnackbar({type:"error", message:`oops! there was an error signing in`}))
         else 
           dispatch(setSnackbar({type:"error", message:`oops! an unknownn error occurred: ${error}`}))
       }

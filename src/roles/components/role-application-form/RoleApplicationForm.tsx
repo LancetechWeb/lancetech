@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import ContactFields from './ContactFields';
 import PortfolioFields from './PortfolioFields';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { setHasFooter, setNavbarColor } from '../../../core/reducers/uiSlice';
 import { COLORS } from '../../../core/styles/COLORS';
 import { Step, Stepper, StepProvider } from '../../../utils/stepper';
@@ -16,6 +16,7 @@ import { setSnackbar } from '../../../core/reducers/coreSlice';
 import LegalInformation from './LegalInformation';
 import { convertMapToFormData } from '../../../utils/object';
 import RoleApplicationActions from './RoleApplicationActions';
+import ConfirmationDialog from './ConfirmationDialog';
 
 const RoleApplicationForm = ({role}:{role:Role}) => {
     // variables
@@ -25,6 +26,7 @@ const RoleApplicationForm = ({role}:{role:Role}) => {
     const additionalDocumentsFileTypes = Object.values(FileType)
 
     // hooks
+    const[openConfirmationDialog, setOpenConfirmationDialog] = useState<boolean>(false)
     useEffect(()=>{
         dispatch(setHasFooter(false));
         dispatch(setNavbarColor(COLORS.DarkBlue));
@@ -50,8 +52,11 @@ const RoleApplicationForm = ({role}:{role:Role}) => {
       
         const {data, error} = await axiosWrapper({method:'POST', url:`/roles/apply/${role._id}`, data:formData});
 
-        if(data) dispatch(setSnackbar({type:"success", message:"Application sent successfully"}))    
-        if(error) dispatch(setSnackbar({type:"error", message:`oops! there was an error: ${error.message}`}))      
+        if(data) {
+            dispatch(setSnackbar({type:"success", message:"Application sent successfully"}))
+            setOpenConfirmationDialog(true);
+        }    
+        if(error) dispatch(setSnackbar({type:"error", message:`${error.message}`}))      
     }
 
   return (
@@ -138,6 +143,7 @@ const RoleApplicationForm = ({role}:{role:Role}) => {
                 </Box>
             </Box>
         </Box>
+        <ConfirmationDialog role={role} open={openConfirmationDialog}/>
     </StepProvider>
   )
 }

@@ -54,6 +54,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/lodash": "^4.17.13",
     "@types/react-dropzone": "^5.1.0",
     "@types/react-slick": "^0.23.13",
