@@ -41,7 +41,7 @@ const RoleApplicationActions = ({role}:{role:Role}) => {
                 cancel
             </Button>
             <Button variant="contained" type='submit' sx={{ py:2, px:6, my:"auto", background:COLORS.MainBlue }}>
-                Login
+                Apply
             </Button>
         </Box>
     </Box>

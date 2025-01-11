@@ -8,6 +8,7 @@ import { RootState } from '../../store';
 import { TransitionProps } from '@mui/material/transitions';
 import Button from '../../core/styles/Button';
 import LoginMenu from './LoginMenu';
+import { useEffect } from 'react';
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -32,6 +33,9 @@ const MobileMenu = () => {
     navigate('/roles');
     handleClose();
   };
+
+  // close menu on unmount
+  useEffect(()=>()=>{ dispatch(setOpenMenu(false))}, [dispatch]);
 
   return (
     <Box>
