@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setIsAuthenticated, setSnackbar, setUser } from '../reducers/coreSlice';
+import { setIsAuthenticated, setUser } from '../reducers/coreSlice';
 import { axiosWrapper } from '../../utils/auth/axiosInstance';
 import { User } from '../types/core.state.types';
 
