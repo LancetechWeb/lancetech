@@ -16,13 +16,11 @@ const useAuthCheck = () => {
           // User is authenticated
           dispatch(setIsAuthenticated(true))
           dispatch(setUser(data))
-          dispatch(setSnackbar({type:"success", message:`${user.lastName},${user.firstName} is authenticated`})) 
         } 
         if(error) {
           // Handle error or assume user is not authenticated
         dispatch(setIsAuthenticated(false))
         dispatch(setUser(undefined))
-        dispatch(setSnackbar({type:"error", message:`Not authenticated!`})) 
         }    
     };
 
