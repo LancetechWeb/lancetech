@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 const RoleCard = ({role, onClick}:{role:Role; onClick:(roleId:string)=> void}) => {
     const {roleId} = useParams()
 
-    const {_id, title, rank, remote} = role
+    const {id, title, rank, remote} = role
 
   return (
     <Card
@@ -19,10 +19,10 @@ const RoleCard = ({role, onClick}:{role:Role; onClick:(roleId:string)=> void}) =
             cursor:"pointer",
             p:2,
             position:"relative",
-            ...(roleId && roleId === _id && {border:`2px solid ${COLORS.LightBlue}`}),
+            ...(roleId && roleId === id && {border:`2px solid ${COLORS.LightBlue}`}),
             boxShadow:"none"
         }}
-        onClick={()=> onClick(_id)}
+        onClick={()=> onClick(id)}
     >
         <Box sx={{position:"absolute", right:5, top:5, zIndex:1000}}>
         </Box>

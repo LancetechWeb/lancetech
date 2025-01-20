@@ -61,7 +61,7 @@ const RoleDetails = ({id}:{id?:string}) => {
             <Box sx={{display:"flex", gap:2}}>
                 <Box>
                     <Typography sx={{fontWeight:600}}>Job ID</Typography>
-                    <Typography sx={{textWrap:""}}>{role._id}</Typography>
+                    <Typography sx={{textWrap:""}}>{role.id}</Typography>
                 </Box>
                 <Box>
                     <Typography sx={{fontWeight:600}}>Rank</Typography>

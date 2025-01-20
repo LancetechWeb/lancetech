@@ -41,7 +41,7 @@ const RolesDisplay = () => {
             },
         }}
     >
-        { roles.map(role => <RoleCard key={role._id} role={role} onClick={handleRoleClick} />)}    
+        { roles.map(role => <RoleCard key={role.id} role={role} onClick={handleRoleClick} />)}    
     </Box>
   )
 }

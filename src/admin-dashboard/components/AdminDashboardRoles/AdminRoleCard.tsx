@@ -31,14 +31,14 @@ const AdminRoleCard = ({
 
     const handleOnAcceptToDelete = async () =>{
         // logic to send delete post request
-        const {data, error} = await axiosWrapper({method:'POST', url:'/authenticate/sign-out', data:{}});
+        const {data, error} = await axiosWrapper({method:'POST', url:`/roles/update/${role._id}`, data:{isActive:false}});
 
         if(data){
           setOpenDeleteRoleModal(false)
           dispatch(setSnackbar({type:"success", message:"role deleted successfully!"}))   
         } 
 
-        if(error) dispatch(setSnackbar({type:"error", message:`error logging out ${error.message}`})) 
+        if(error) dispatch(setSnackbar({type:"error", message:`error deleting role ${error.message}`})) 
     }
 
   return (

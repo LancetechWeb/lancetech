@@ -2,6 +2,7 @@ import { InitialStateManagement } from "../../utils/state/types/state.types";
 
 export interface Role{
     _id:string;
+    id:string;
     title:string;
     rank:string;
     remote:string;

@@ -55,6 +55,11 @@ axiosInstance.interceptors.response.use(
   }
 );
 
+/**
+ * extracts the data from the response or error from the axios request
+ * @param config 
+ * @returns 
+ */
 export const axiosWrapper = async (config: AxiosRequestConfig): Promise<{ data?: any; error?: AxiosError|Error }> => {
   try {
     const response:AxiosResponse = await axiosInstance.request(config);

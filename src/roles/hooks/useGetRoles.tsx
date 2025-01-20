@@ -29,7 +29,7 @@ const useGetRoles = (searchString?: string, page?: number, pageSize?: number, ) 
             // }]
           
             const dataDictionary =  roles.reduce((accumulator:Record<string, Role>, currentValue )=>{
-                accumulator[currentValue._id] = currentValue
+                accumulator[currentValue.id] = currentValue
                 
                 return accumulator;
             }, {})
