@@ -48,9 +48,10 @@ const RoleApplicationForm = ({role}:{role:Role}) => {
         const formData = convertMapToFormData(formValues);
 
         // add role to payload
-        formData.append("roleId", role._id)
+        formData.append("roleId", role.id)
+        formData.append("roleTitle", role.title)
       
-        const {data, error} = await axiosWrapper({method:'POST', url:`/roles/apply/${role._id}`, data:formData});
+        const {data, error} = await axiosWrapper({method:'POST', url:`/roles/apply/${role.id}`, data:formData});
 
         if(data) {
             dispatch(setSnackbar({type:"success", message:"Application sent successfully"}))
