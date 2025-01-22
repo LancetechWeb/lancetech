@@ -7,7 +7,7 @@ const RoleApplicationActions = ({role}:{role:Role}) => {
     const navigate = useNavigate()
     const isMobile = useMediaQuery("(max-width:800px)");
 
-    const handleCancelForm = () => navigate(`${role._id}`);
+    const handleCancelForm = () => navigate(`${role.id}`);
 
   return (
     <Box 

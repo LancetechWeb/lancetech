@@ -10,7 +10,7 @@ const ConfirmationDialog = ({role, open}:{role:Role; open:boolean}) => {
   const navigate = useNavigate();
 
   const handleClose = () => {
-    navigate(`${role._id}`)
+    navigate(`${role.id}`)
   };
 
   return (
