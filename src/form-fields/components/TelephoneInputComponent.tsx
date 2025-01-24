@@ -4,7 +4,7 @@ import { TelephoneInputComponentProps } from '../types/form-fields.types'
 import { Typography } from '@mui/material';
 
 const TelephoneInputComponent = <T extends FieldValues>  (props:TelephoneInputComponentProps<T >) => {
-    const { name, control, rules, onChange, ...rest } = props;
+    const { name, control, rules, onChange, sx, ...rest } = props;
 
 
   return (
@@ -21,7 +21,7 @@ const TelephoneInputComponent = <T extends FieldValues>  (props:TelephoneInputCo
                 defaultCountry={'US'}
                 id="phoneNumber"
                 name="phoneNumber"
-                sx={{width:"100%"}}
+                sx={{width:"100%", ...sx}}
                 onChange={(val, info) => {
                     onChange && onChange(val, info);
                     matchIsValidTel(val)

@@ -1,51 +1,60 @@
-import  { useState } from 'react';
-import { Box, Typography, Icon, TextField, Button, IconButton } from '@mui/material';
+import { Box, Typography, Icon, Button, IconButton } from '@mui/material';
 import * as Yup from 'yup';
-import { useFormik } from 'formik';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { COLORS } from '../../core/styles/COLORS';
 import { RootState } from '../../store';
 import ContactUsStyle from '../styles/ContactUsStyle';
-import { MuiTelInput } from 'mui-tel-input'
+import TextFieldComponent from '../../form-fields/components/TextFieldComponent';
+import Label from '../../core/components/Label';
+import { useForm } from 'react-hook-form';
+import TelephoneInputComponent from '../../form-fields/components/TelephoneInputComponent';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { setSnackbar } from '../../core/reducers/coreSlice';
+import { axiosWrapper } from '../../utils/auth/axiosInstance';
+
+interface ContactUsFormFields {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  explanation: string;
+}
 
 const validationSchema = Yup.object({
-  yourName: Yup.string().required('Please put in your name'),
+  name: Yup.string().required('Please put in your name'),
   email: Yup.string().email('Enter valid email').required('Required'),
-  phoneNumber: Yup.string(),
+  phoneNumber: Yup.string().required("Phone Number is required"),
   explanation: Yup.string().required('Please tell us about the project'),
 });
 
 const ContactUs = () => {
-  const [phoneNumber, setPhoneNumber] = useState('soda');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const previousPage = useSelector((state:RootState) => state.coreReducer.previousPage);
 
   const { LightFont, FadedWhite, LightBlue, LightGrey, MainBlue } = COLORS;
 
-  const formik = useFormik({
-    initialValues: {
-      yourName: '',
-      email: '',
-      phoneNumber: '',
-      explanation: '',
-    },
+  const {control, handleSubmit, reset} = useForm<ContactUsFormFields>({
+    resolver:yupResolver(validationSchema),
+      defaultValues: {
+          name: "",
+          email: "",
+          phoneNumber: "",
+          explanation: "",
+        },
+  })
 
-    validationSchema: validationSchema,
+    const handleSubmitForm =  async(formValues:ContactUsFormFields) =>{
+      console.log(formValues)
 
-    onSubmit: (values, input) => {
-      const fields = { ...values, phoneNumber };
-      console.log('values from contact page Form', fields);
-      input.resetForm();
-      setPhoneNumber('');
-    },
-  });
-
-  const handlePhoneNumber = (e:string) => {
-    console.log('phone number', e);
-    setPhoneNumber(e);
-  };
+     const {data, error} = await axiosWrapper({method:'POST', url:`/contact/contact-us`, data:formValues});
+            if(data) {
+                dispatch(setSnackbar({type:"success", message:"Request sent successfully"}))
+                reset();
+            }    
+            if(error) dispatch(setSnackbar({type:"error", message:`${error.message}`}))   
+    }
 
   const textFieldStyles = {
     width: '100%',
@@ -81,6 +90,12 @@ const ContactUs = () => {
     navigate(previousPage);
   };
 
+  const handleKeyEvent = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      handleSubmit(handleSubmitForm)();
+    }
+  }
+
   return (
     <ContactUsStyle>
       <Box className="contactUsLeft" sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -94,77 +109,60 @@ const ContactUs = () => {
             Let's level up your <br /> brand, together
           </Typography>
         </Box>
-        <form
-          onSubmit={formik.handleSubmit}
-          style={{
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2rem',
-            maxWidth: '50rem',
-            // height: '60%',
-          }}
-        >
-          <TextField
-            fullWidth
-            id="yourName"
-            name="yourName"
-            label="Name"
-            sx={textFieldStyles}
-            value={formik.values.yourName}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.yourName && Boolean(formik.errors.yourName)}
-            helperText={formik.touched.yourName && formik.errors.yourName}
-          />
-          <TextField
-            fullWidth
-            id="email"
-            name="email"
-            label="Email"
-            sx={textFieldStyles}
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-          />
+        <Box 
+          component="form" 
+          onSubmit={handleSubmit(handleSubmitForm)} 
+          sx={{display:"flex", width: '100%', flexDirection:"column", gap:5, maxWidth: '50rem'}}>
 
-          <MuiTelInput 
-            fullWidth
+          <TextFieldComponent <ContactUsFormFields>
+            id="name"
+            name='name'
+            label={<Label title='Name' required/>}
             variant="outlined"
-            value={phoneNumber} 
-            defaultCountry={'US'}
-            id="phoneNumber"
-            name="phoneNumber"
-            label="Phone number"
-            sx={textFieldStyles}
-            onChange={handlePhoneNumber} 
-            onBlur={formik.handleBlur}
-            error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
-            helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
-          />
+            control={control}
+            sx={textFieldStyles} 
+            rules={{}}  
+            onKeyDown={handleKeyEvent}   
+        />
+          <TextFieldComponent <ContactUsFormFields>
+            id="email"
+            name='email'
+            label={<Label title='Email' required/>}
+            variant="outlined"
+            control={control}
+            sx={textFieldStyles} 
+            rules={{}}     
+            onKeyDown={handleKeyEvent}   
+        />
 
-          <TextField
-            fullWidth
+        <TelephoneInputComponent <ContactUsFormFields>
+            name='phoneNumber'
+            label={<Label title='Phone Number' required/>}
+            variant="outlined"
+            control={control}
+            sx={textFieldStyles} 
+            rules={{}}   
+            onKeyDown={handleKeyEvent}   
+        />
+       
+          <TextFieldComponent <ContactUsFormFields>
             id="explanation"
-            name="explanation"
-            label="How can we help?"
-            sx={textFieldStyles}
-            value={formik.values.explanation}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.explanation && Boolean(formik.errors.explanation)}
-            helperText={formik.touched.explanation && formik.errors.explanation}
+            name='explanation'
+            label={<Label title='How can we help?' required/>}
+            variant="outlined"
+            control={control}
+            sx={textFieldStyles} 
+            rules={{}}    
             multiline
             rows={5}
-            placeholder="Tell us a little about the project"
-          />
+            placeholder="Tell us a little about the project"   
+            onKeyDown={handleKeyEvent}   
+        />
 
           <Button type="submit" variant="contained" sx={{ bgcolor: MainBlue, py: 2 }}>
             Get Started
           </Button>
-        </form>
+        </Box>
       </Box>
       <Box className="contactUsRight" />
     </ContactUsStyle>
