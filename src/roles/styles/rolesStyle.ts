@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import { getVariable } from '../../utils/misc/env.misc';
 
-const bgImg = `${getVariable("BASE_URL")}/images/get-image/17DY88QbmOzM2volO0bTxlJMOvxbG2z_a`;
 
 export const RolesStyle = styled.div`
   @media only screen and (max-width: 800px) {
@@ -17,11 +15,6 @@ export const RolesStyle = styled.div`
 
   .rolesHeader {
     height: 40rem;
-    background-size: cover;
-    background: linear-gradient(to right, rgba(2, 18, 44, 1), rgba(2, 26, 63, 0.7)), url(${bgImg});
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -3,8 +3,16 @@ import { Icon, Box,  } from '@mui/material';
 import Button from '../../../core/styles/Button';
 import { OurCultureStyle } from '../../styles/OurCultureStyle';
 import { COLORS } from '../../../core/styles/COLORS';
+import useIDBImages from '../../../core/hooks/useIDBImages';
+import { MiscImagesIds } from '../../../core/types/core.types';
+import { IDBStores } from '../../../utils/indexedDB/types/indexedDB.types';
+import { getVariable } from '../../../utils/misc/env.misc';
 
 const OurCulture = ({ toRoles }:{toRoles:()=>void}) => {
+
+      // get image
+      const cultureImgURL = `${getVariable("BASE_URL")}/images/get-image/${MiscImagesIds.OUR_CULTURE}`;
+      const ourCultureImage = useIDBImages(cultureImgURL, IDBStores.MISC_IMAGES, MiscImagesIds.OUR_CULTURE);
   return (
     <OurCultureStyle>
       <Box sx={{ m: 'auto' }}>
@@ -45,7 +53,18 @@ const OurCulture = ({ toRoles }:{toRoles:()=>void}) => {
             </div>
             <Button onClick={toRoles}>See Open Roles</Button>
           </div>
-          <div className="ourCultureImg" />
+
+          <Box className="ourCultureImg" 
+            sx={{
+                backgroundImage: `url(${ourCultureImage})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                borderRadius: '5px',
+                width: "50%",
+                border: '2px solid'
+            }}
+        />
         </div>
       </Box>
     </OurCultureStyle>

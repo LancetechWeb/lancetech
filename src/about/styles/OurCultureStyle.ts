@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 import { COLORS } from '../../core/styles/COLORS';
-import { getVariable } from '../../utils/misc/env.misc';
-
-const cultureImgURL = `${getVariable("BASE_URL")}/images/get-image/1VYaBtUK7j1r_pcB49cchzgTx0lGt0XVG`
 
 export const OurCultureStyle = styled.div`
   background-color: ${COLORS.DarkBlue3};
@@ -66,14 +63,6 @@ export const OurCultureStyle = styled.div`
     }
 
     .ourCultureImg {
-      width: 50%;
-      background-size: cover;
-      background: url(${cultureImgURL});
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      border: 2px solid;
-
       @media only screen and (max-width: 700px) {
         display: none;
       }

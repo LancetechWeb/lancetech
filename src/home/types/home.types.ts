@@ -1,0 +1,3 @@
+import { MiscImagesIds } from "../../core/types/core.types";
+
+export interface TeamListType { memberName: string; memberTitle: string; memberImg: string, imageId:MiscImagesIds }

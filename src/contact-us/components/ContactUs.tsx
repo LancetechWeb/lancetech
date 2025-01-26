@@ -13,6 +13,10 @@ import TelephoneInputComponent from '../../form-fields/components/TelephoneInput
 import { yupResolver } from '@hookform/resolvers/yup';
 import { setSnackbar } from '../../core/reducers/coreSlice';
 import { axiosWrapper } from '../../utils/auth/axiosInstance';
+import useIDBImages from '../../core/hooks/useIDBImages';
+import { IDBStores } from '../../utils/indexedDB/types/indexedDB.types';
+import { MiscImagesIds } from '../../core/types/core.types';
+import { getVariable } from '../../utils/misc/env.misc';
 
 interface ContactUsFormFields {
   name: string;
@@ -96,9 +100,13 @@ const ContactUs = () => {
     }
   }
 
+  // get image
+  const bgImageUrl = `${getVariable("BASE_URL")}/images/get-image/${MiscImagesIds.CONTACT_US}`
+  const bgimage = useIDBImages(bgImageUrl, IDBStores.MISC_IMAGES, MiscImagesIds.CONTACT_US);
+
   return (
     <ContactUsStyle>
-      <Box className="contactUsLeft" sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      <Box className="contactUsLeft" sx={{ display: 'flex', flexDirection: 'column', gap: '2rem', position: 'relative' }}>
         <IconButton onClick={handleBack} sx={{ position: 'absolute', top: 15, left: 10 }}>
           <ArrowBackIosIcon sx={{ color: FadedWhite }} />
           <Typography sx={{ color: FadedWhite }}>Back</Typography>
@@ -164,7 +172,12 @@ const ContactUs = () => {
           </Button>
         </Box>
       </Box>
-      <Box className="contactUsRight" />
+      <Box className="contactUsRight" sx={{
+        width: "40%",
+        backgroundImage: `url(${bgimage})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover"
+      }}/>
     </ContactUsStyle>
   );
 };

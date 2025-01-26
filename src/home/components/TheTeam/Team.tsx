@@ -1,5 +1,6 @@
-import TeamStyle, { TeamMemberStyle } from '../../styles/team.styles';
-import { TeamList } from '../__fixtures__/Team.fixtures';
+import TeamStyle from '../../styles/team.styles';
+import { teamList } from '../__data__/team.data';
+import TeamMember from './TeamMember';
 
 const Team = () => {
   return (
@@ -10,16 +11,8 @@ const Team = () => {
         </h1>
         <hr />
         <div className="teamGallery">
-          {TeamList.map(member => (
-            <div>
-              <TeamMemberStyle className="teamMember" memberImage={member.memberImg}>
-                {/* <img src={member.memberImg} alt="teamMember" /> */}
-              </TeamMemberStyle>
-              <div className="nameAndTitle">
-                <div className="memberName">{member.memberName}</div>
-                <div className="memberTitle">{member.memberTitle}</div>
-              </div>
-            </div>
+          {teamList.map(member => (
+            <TeamMember member={member}/>
           ))}
         </div>
         <hr />
