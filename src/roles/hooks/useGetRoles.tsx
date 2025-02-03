@@ -16,18 +16,7 @@ const useGetRoles = (searchString?: string, page?: number, pageSize?: number, ) 
 
           if(data){
             const roles:Role[] = data.results;  
-            
-            //      [{
-            //     _id:"344342",
-            //     title:"Hello Bobo",
-            //     rank:"Highest rank",
-            //     remote:"anywhere in the world",
-            //     description:"most flexible job in the world",
-            //     isActive: true,
-            //     createdAt: "",
-            //     updatedAt: ""
-            // }]
-          
+                    
             const dataDictionary =  roles.reduce((accumulator:Record<string, Role>, currentValue )=>{
                 accumulator[currentValue.id] = currentValue
                 

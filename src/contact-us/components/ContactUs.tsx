@@ -164,7 +164,6 @@ const ContactUs = () => {
             multiline
             rows={5}
             placeholder="Tell us a little about the project"   
-            onKeyDown={handleKeyEvent}   
         />
 
           <Button type="submit" variant="contained" sx={{ bgcolor: MainBlue, py: 2 }}>

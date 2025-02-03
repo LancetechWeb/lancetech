@@ -4,10 +4,10 @@ import { IDBStores } from "../../../utils/indexedDB/types/indexedDB.types";
 import { TeamListType } from "../../types/home.types";
 
 
-const TeamMember = ({member}:{member:TeamListType}) => {
+const TeamMember = ({member, onlyImage}:{member:TeamListType, onlyImage?:boolean}) => {
 
     // get image
-  const image = useIDBImages(member.memberImg, IDBStores.MISC_IMAGES, member.imageId);
+  const image = useIDBImages(member.memberImgUrl, IDBStores.MISC_IMAGES, member.imageId);
 
   return (
     <div>
@@ -23,10 +23,12 @@ const TeamMember = ({member}:{member:TeamListType}) => {
                 /* overflow: "hidden"; */
             }}
         />
-        <div className="nameAndTitle">
-        <div className="memberName">{member.memberName}</div>
-        <div className="memberTitle">{member.memberTitle}</div>
-        </div>
+        {!onlyImage && 
+          <div className="nameAndTitle">
+            <div className="memberName">{member.memberName}</div>
+            <div className="memberTitle">{member.memberTitle}</div>
+          </div>
+        }
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { Box, TextField, Button } from '@mui/material'
+import { Box, TextField, Button, useMediaQuery, Autocomplete, Chip } from '@mui/material'
 import { useState } from 'react'
 import { COLORS } from '../../../core/styles/COLORS'
 import { axiosWrapper } from '../../../utils/auth/axiosInstance'
@@ -15,12 +15,15 @@ const AddRole = ({
 }:{
     role?:Role
 }) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const isMobile = useMediaQuery("(max-width:800px)");
+    
 
     // local state
     const [title, setTitle] = useState<string>(role?.title ?? "")
     const [rank, setRank] = useState<string>(role?.rank ?? "")
     const [remote, setRemote] = useState<string>(role?.remote ?? "")
+    const [recipients, setRecipients] = useState<string[]>([])
     const [description, setDescription] = useState<string>(role?.description ?? "")
 
     // selectors
@@ -29,13 +32,14 @@ const AddRole = ({
 
     const handleAddRole = async () => {
         const {error, data} = 
-            await axiosWrapper({method:'POST', url:'/roles/create-role', data:{title, rank, remote, description}})
+            await axiosWrapper({method:'POST', url:'/roles/create-role', data:{title, rank, remote, description, recipients}})
             
             if(data) {
                 setTitle("")
                 setRank("")
                 setRemote("")
                 setDescription("")
+                setRecipients([])
                 dispatch(setSnackbar({type:"success", message:"Role added successfully!"}))    
             }
 
@@ -66,15 +70,18 @@ const AddRole = ({
     <Box sx={{
         display:"flex", 
         flexDirection:"column", 
-        gap:1, 
+        gap:4, 
         alignItems:"center",
         justifyContent:"center", 
         borderRadius:"5px",
         minWidth:"250px",
-        maxWidth:"500px",
+        px:4,
         alignSelf:"center",
-        maxHeight:"75%"
+        maxHeight:"75%",
+        maxWidth:"1000px",
+        width:"80%"
     }}>
+        <Box sx={{display:"flex", flexDirection:isMobile?"column":"row", gap:2, width:"100%" }}>
             <TextField 
                 value={title}
                 id="outlined-basic" 
@@ -101,6 +108,7 @@ const AddRole = ({
                 }
                 sx={{width:"100%"}}
             />
+        </Box>
             <TextField
                 value={remote}
                 label="Remote" 
@@ -113,6 +121,30 @@ const AddRole = ({
                 }}
                 sx={{width:"100%"}}
             />
+                {!role &&
+                    <Autocomplete
+                    multiple
+                    freeSolo
+                    options={[]} // No predefined options since users can enter anything
+                    value={recipients}
+                    onChange={(event, newValue) => setRecipients(newValue)}
+                    filterSelectedOptions
+                    renderTags={(value: readonly string[], getTagProps) =>
+                        value.map((option: string, index: number) => (
+                        <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                        ))
+                    }
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            variant="outlined"
+                            label="Recipient Emails"
+                            placeholder="Type and press Enter"
+                        />
+                    )}
+                    sx={{width:"100%"}}
+                />
+            }
             <LexicalEditorComponent 
                 value={description}
                 toolbarButtons={allToolbarIcons} 

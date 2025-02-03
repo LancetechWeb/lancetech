@@ -26,7 +26,9 @@ const AdminDashboard = () => {
       }}>
         <DashBoardHeader/>
         <Divider/>
-        <Outlet/>
+        <Box>
+          <Outlet/>
+        </Box>
       </Box>
     </Box>
   )
