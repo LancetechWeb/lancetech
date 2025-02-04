@@ -58,7 +58,7 @@ const RoleDetails = ({id}:{id?:string}) => {
             </Box>
            
             <Divider/>
-            <Box sx={{display:"flex", gap:2}}>
+            <Box sx={{display:"flex", justifyContent:"space-between", maxWidth:400 }}>  
                 <Box>
                     <Typography sx={{fontWeight:600}}>Job ID</Typography>
                     <Typography sx={{textWrap:""}}>{role.id}</Typography>

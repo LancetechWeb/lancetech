@@ -25,14 +25,14 @@ const OurCulture = ({ toRoles }:{toRoles:()=>void}) => {
                   <BackupTableSharpIcon sx={{ color: COLORS.LightBlue }} />
                 </Icon>
                 <h4>Flexible</h4>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim magni quo ab non? Error qui, iste consequuntur quasi</p>
+                <p>We adapt to change quickly, providing flexibility in how we work to meet evolving needs.</p>
               </div>
               <div className="cultures">
                 <Icon sx={{ backgroundColor: COLORS.DarkBlue, p: 1, borderRadius: 1 }}>
                   <BackupTableSharpIcon sx={{ color: COLORS.LightBlue }} />
                 </Icon>
-                <h4>Flexible</h4>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim magni quo ab non? Error qui, iste consequuntur quasi</p>
+                <h4>Inovative</h4>
+                <p>We embrace new ideas, tackling challenges with fresh solutions to stay ahead in technology.</p>
               </div>
             </div>
             <div className="cultureMidLeftSub">
@@ -40,15 +40,15 @@ const OurCulture = ({ toRoles }:{toRoles:()=>void}) => {
                 <Icon sx={{ backgroundColor: COLORS.DarkBlue, p: 1, borderRadius: 1 }}>
                   <BackupTableSharpIcon sx={{ color: COLORS.LightBlue }} />
                 </Icon>
-                <h4>Flexible</h4>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim magni quo ab non? Error qui, iste consequuntur quasi</p>
+                <h4>Collaborative</h4>
+                <p>Teamwork is key to our success; we combine strengths to achieve the best results.                </p>
               </div>
               <div className="cultures">
                 <Icon sx={{ backgroundColor: COLORS.DarkBlue, p: 1, borderRadius: 1 }}>
                   <BackupTableSharpIcon sx={{ color: COLORS.LightBlue }} />
                 </Icon>
-                <h4>Flexible</h4>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim magni quo ab non? Error qui, iste consequuntur quasi</p>
+                <h4>Integrity</h4>
+                <p>We act with honesty and transparency, building trust within the company and with clients. </p>
               </div>
             </div>
             <Button onClick={toRoles}>See Open Roles</Button>

@@ -30,7 +30,6 @@ export const OurTeamsStyle = styled.div`
       flex-direction: column;
       align-items: flex-start;
       gap: 0.5rem;
-      margin-bottom: 2rem;
 
       h3 {
         margin: 0;
