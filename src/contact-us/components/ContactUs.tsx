@@ -50,7 +50,6 @@ const ContactUs = () => {
   })
 
     const handleSubmitForm =  async(formValues:ContactUsFormFields) =>{
-      console.log(formValues)
 
      const {data, error} = await axiosWrapper({method:'POST', url:`/contact/contact-us`, data:formValues});
             if(data) {

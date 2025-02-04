@@ -12,7 +12,7 @@ const LegalInformation = ({
     <AutoCompleteComponent <RoleApplicationFormFields>
         control={control}
         data-testid="legalWorkPermit"
-        rules={{ required: `absence code is required` }}
+        rules={{ required: `legal sponsorship is a required field` }}
         options={["Yes", "No"]}
         name="legalWorkPermit"
         inputProps={{

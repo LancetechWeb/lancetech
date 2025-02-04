@@ -13,8 +13,6 @@ const AdminAuthWrapper = () => {
 
  
    useLayoutEffect(()=>{
-    console.log("...navigate to login in AdminAuthWrapper", isAuthenticated)
-    
      isAuthenticated === false &&  navigate('/admin/login') // Redirect to admin Login page
    }, [isAuthenticated, navigate])
 

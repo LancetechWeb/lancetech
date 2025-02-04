@@ -64,5 +64,7 @@ export interface FileUploadProps<T extends FieldValues>
   multiple?: boolean; // Determines if multiple files can be uploaded
   allowedFileTypes:FileType[]
   setValue:(name:Path<T>, value: File[]|undefined)=>void
-  trigger: UseFormReturn<T>['trigger']
+  trigger: UseFormReturn<T>['trigger'];
+  maxFiles?:number;
+  maxSize?:number;
 }

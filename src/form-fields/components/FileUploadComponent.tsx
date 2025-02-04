@@ -9,7 +9,7 @@ import { Controller, FieldValues } from 'react-hook-form';
 import { omit } from 'lodash';
 import TaskOutlinedIcon from '@mui/icons-material/TaskOutlined';
 
-const FileUpload=<T extends FieldValues>({ multiple, allowedFileTypes, name, control, rules, setValue, trigger  }:FileUploadProps<T>) => {
+const FileUpload=<T extends FieldValues>({ multiple, allowedFileTypes, name, control, rules, setValue, trigger, maxFiles, maxSize  }:FileUploadProps<T>) => {
   const [files, setFiles] = useState<Record<string, File>>({});
   const [notSupportedError, setNotSupportedError] = useState<string | null>(null);
 
@@ -24,8 +24,11 @@ const FileUpload=<T extends FieldValues>({ multiple, allowedFileTypes, name, con
       // Clear any previous errors
       setNotSupportedError(null);
 
-      if (fileRejections.length > 0)
-        return setNotSupportedError('Some files are not supported. Please upload PDF, DOC, DOCX, or TXT files.');    
+      if (fileRejections.length > 0){
+        setValue(name, Object.values(updatedFileMap))      
+        trigger(name); // Trigger validation after setting the value
+        return setNotSupportedError(fileRejections[0].errors[0].message); 
+      }
 
       setFiles(updatedFileMap);
       setValue(name, Object.values(updatedFileMap))      
@@ -38,11 +41,12 @@ const FileUpload=<T extends FieldValues>({ multiple, allowedFileTypes, name, con
     onDrop,
     accept: generateAcceptObject(allowedFileTypes),
     multiple, // Controls whether multiple files are accepted
+    maxSize: maxSize ? maxSize * 1024 * 1024 : undefined, // Convert MB to bytes
+    maxFiles
   });
 
   const handleDelete = (fileName:string) => {
     const updatedFiles = omit(files, fileName)
-    console.log("updatedFiles", updatedFiles)
     setFiles(updatedFiles);
     setValue(name, Object.values(updatedFiles)); // Update the form state when deleting a file
     trigger(name); // Trigger validation after deleting a file
@@ -85,6 +89,8 @@ const FileUpload=<T extends FieldValues>({ multiple, allowedFileTypes, name, con
             Select Files
           </Button>
         </Box>
+        {maxSize && <Typography variant='body2' sx={{color:"GrayText"}}>max file size is {maxSize}MB</Typography>}
+        {maxFiles && <Typography variant='body2' sx={{color:"GrayText"}}>You can only upload up to {maxFiles} files</Typography>}
         {notSupportedError && (
           <Alert severity="error" sx={{ mt: 2 }} onClose={()=> setNotSupportedError(null)}>
             {notSupportedError}

@@ -1,13 +1,17 @@
-import { Box, Button, useMediaQuery } from '@mui/material'
+import { Box, Button, Typography, useMediaQuery } from '@mui/material'
 import { COLORS } from '../../../core/styles/COLORS'
 import { useNavigate } from 'react-router-dom';
-import { Role } from '../../types/roles.types';
+import { Role, RoleApplicationFormFields } from '../../types/roles.types';
+import { FieldErrors } from 'react-hook-form';
 
-const RoleApplicationActions = ({role}:{role:Role}) => {
+const RoleApplicationActions = ({role, loading, errors}:{role:Role; loading:boolean; errors:FieldErrors<RoleApplicationFormFields>}) => {
     const navigate = useNavigate()
     const isMobile = useMediaQuery("(max-width:800px)");
 
     const handleCancelForm = () => navigate(`${role.id}`);
+
+    const hasErrors = Object.keys(errors).length > 0;
+    const firstError = Object.values(errors)[0]?.message;
 
   return (
     <Box 
@@ -37,12 +41,34 @@ const RoleApplicationActions = ({role}:{role:Role}) => {
                 px:2
             }),                                                         
         }}>
-            <Button onClick={handleCancelForm} variant="outlined" type='submit' sx={{ py:2, my:"auto", color:COLORS.MainBlue, borderColor:COLORS.MainBlue }}>
+            <Button onClick={handleCancelForm} disabled={loading} variant="outlined" type='submit' sx={{ py:2, my:"auto", color:COLORS.MainBlue, borderColor:COLORS.MainBlue }}>
                 cancel
             </Button>
-            <Button variant="contained" type='submit' sx={{ py:2, px:6, my:"auto", background:COLORS.MainBlue }}>
-                Apply
-            </Button>
+            <Box sx={{display:"flex", flexDirection:"column", gap:1}}>
+                <Button 
+                    loading={loading} 
+                    variant="contained" 
+                    type='submit' 
+                    sx={{ 
+                            py:2, 
+                            px:6, 
+                            my:"auto", 
+                            background: hasErrors ? "none" : COLORS.MainBlue, 
+                            color: hasErrors ? 'red' : 'white',
+                            border: firstError ? `1px solid red` : "none", 
+                            boxShadow:"none"
+                        }}   
+                >
+                    Apply
+                </Button>
+
+                {/* Optional error message below the button */}
+                {firstError && (
+                    <Typography color="error" variant="caption">
+                        {firstError}
+                    </Typography>
+                )}
+            </Box>
         </Box>
     </Box>
   )

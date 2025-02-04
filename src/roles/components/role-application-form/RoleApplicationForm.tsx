@@ -25,6 +25,9 @@ const RoleApplicationForm = ({role}:{role:Role}) => {
     const resumeFileTypes = [FileType.PDF, FileType.DOC, FileType.DOCX, FileType.DOCX]
     const additionalDocumentsFileTypes = Object.values(FileType)
 
+    // local states
+    const [loading, setLoading] = useState<boolean>(false);
+
     // hooks
     const[openConfirmationDialog, setOpenConfirmationDialog] = useState<boolean>(false)
     useEffect(()=>{
@@ -37,14 +40,16 @@ const RoleApplicationForm = ({role}:{role:Role}) => {
         }
     }, [dispatch])
 
-    const {control, handleSubmit, setValue, trigger} = useForm<RoleApplicationFormFields>({
+    const {control, handleSubmit, setValue, trigger, formState:{errors}} = useForm<RoleApplicationFormFields>({
         defaultValues: {
             portfolioLinks: [{id:"firstLink", url:''}],
           },
     })
+
      
     // functions
     const handleSubmitForm = async (formValues:RoleApplicationFormFields) =>{
+        setLoading(true);
         const formData = convertMapToFormData(formValues);
 
         // add role to payload
@@ -56,10 +61,28 @@ const RoleApplicationForm = ({role}:{role:Role}) => {
         if(data) {
             dispatch(setSnackbar({type:"success", message:"Application sent successfully"}))
             setOpenConfirmationDialog(true);
+            setLoading(false);
         }    
-        if(error) dispatch(setSnackbar({type:"error", message:`${error.message}`}))      
+        if(error){ 
+            dispatch(setSnackbar({type:"error", message:`${error.message}`})) 
+            setLoading(false);
+        }     
     }
 
+    // scroll to error field
+    // const handleErrorScroll: SubmitErrorHandler<RoleApplicationFormFields> = (errors) => {
+    //     const firstError = Object.values(errors)[0];
+    
+    //     if (firstError && "ref" in firstError && firstError.ref) {
+    //         const ref = firstError.ref;
+    
+    //         // Focus the field (since focus exists)
+    //         if ("focus" in ref && typeof ref.focus === 'function') {
+    //             ref.focus();
+    //         }
+    //     }
+    // };
+    
   return (
     <StepProvider>
         <Box sx={{display:"flex", gap:25, alignItems:"center", justifyContent:"center", ...(isMobile && {px:1})}} >
@@ -92,10 +115,11 @@ const RoleApplicationForm = ({role}:{role:Role}) => {
                             <FileUpload <RoleApplicationFormFields>
                                 allowedFileTypes={resumeFileTypes}
                                 control={control} 
-                                rules={{required:"please upload a document"}} 
+                                rules={{required:"please upload a resume document"}} 
                                 name="resume"
                                 setValue={setValue}
                                 trigger={trigger}
+                                maxSize={3} // 3MB
                             />
                         </Box>
                     </Step>
@@ -123,6 +147,8 @@ const RoleApplicationForm = ({role}:{role:Role}) => {
                                 name="additionalDocuments"
                                 setValue={setValue}
                                 trigger={trigger}
+                                maxSize={3} // 3MB
+                                maxFiles={3}
                             />
                             <Divider sx={{mt:2}}/>
                             <Typography sx={{mt:2}}>If applicable, please provide relevant links (LinkedIn, Github, Portfolio etc.):</Typography>
@@ -140,7 +166,7 @@ const RoleApplicationForm = ({role}:{role:Role}) => {
                     </Step>
 
                     {/** form actions (submit and cancel buttons) */}
-                    <RoleApplicationActions role={role}/>
+                    <RoleApplicationActions role={role} loading={loading} errors={errors}/>
                 </Box>
             </Box>
         </Box>

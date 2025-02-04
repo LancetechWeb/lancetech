@@ -24,8 +24,6 @@ const DashboardRolesComponent = () => {
   // handles role click
   const handleRoleClick = (id:string) =>{
     setRoleId(id)
-    
-    console.log("roleId", id)
 
     setOpenDialog(true)
   }

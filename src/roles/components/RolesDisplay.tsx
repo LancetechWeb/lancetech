@@ -13,11 +13,8 @@ const RolesDisplay = () => {
      // selectors
     const roles = useSelector(selectRoles)
 
-    const handleRoleClick = (id:string) =>{
+    const handleRoleClick = (id:string) =>
         navigate(`/roles/${id}`)
-    
-        console.log("roleId", id)
-    }
 
   return (
     <Box 

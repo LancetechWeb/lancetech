@@ -23,7 +23,6 @@ const RoleSearchComponent = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce((searchValue: string) => {
-      console.log('Search API call with:', searchValue);
       setSearchString(searchValue)
     }, 500),
     []

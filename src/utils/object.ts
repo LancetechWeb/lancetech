@@ -50,8 +50,5 @@ export const convertMapToFormData = <T extends Record<string, unknown>>(data:T) 
         appendToFormData(formData, key, value);
     });
 
-    // console.log("formData", formData)
-    console.log("formValues", data)
-
     return formData;
 }
