@@ -1,4 +1,3 @@
-import React from 'react';
 import loveSVG from '../../../assets/love.svg';
 import { TestimonialsStyle } from '../../styles/HomeStyle';
 import SlickCarousel from '../../../core/components/Carousel/SlickCarousel/SlickCarousel';
