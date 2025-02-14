@@ -12,7 +12,7 @@ const TeamMemberDetails = ({member}:{member:TeamListType}) => {
 
   return (
     <>
-        <Box className="teamMember" 
+        <Box
             sx={{
                 backgroundImage: `url(${image})`,
                 backgroundRepeat: "no-repeat",
@@ -22,7 +22,7 @@ const TeamMemberDetails = ({member}:{member:TeamListType}) => {
                 width: '15rem',
                 alignItems: 'center',
                 borderRadius: '5px',
-                filter: 'grayscale(100%)'
+                // filter: 'grayscale(100%)'
                 /* overflow: "hidden"; */
             }}
         />    

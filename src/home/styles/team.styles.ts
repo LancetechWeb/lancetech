@@ -17,7 +17,7 @@ const TeamStyle = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
     gap: 2.5rem;
-    margin: 3rem 0;
+    margin-bottom: 5rem;
 
     .memberName {
       font-weight: 600;
@@ -29,13 +29,7 @@ const TeamStyle = styled.div`
     }
 
     .nameAndTitle {
-      margin: 1rem 0;
-    }
-  }
-  
-  .teamMember{
-    @media only screen and (max-width: 903px) {
-      height: 20rem;
+     text-align: center;
     }
   }
 `;

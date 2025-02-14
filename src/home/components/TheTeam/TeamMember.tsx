@@ -10,26 +10,18 @@ const TeamMember = ({member, onlyImage}:{member:TeamListType, onlyImage?:boolean
   const image = useIDBImages(member.memberImgUrl, IDBStores.MISC_IMAGES, member.imageId);
 
   return (
-    <div>
-        <Box className="teamMember" 
-            sx={{
-                backgroundImage: `url(${image})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundPosition: "top center",
-                height: '15rem',
-                alignItems: 'center',
-                borderRadius: '5px'
-                /* overflow: "hidden"; */
-            }}
-        />
-        {!onlyImage && 
-          <div className="nameAndTitle">
-            <div className="memberName">{member.memberName}</div>
-            <div className="memberTitle">{member.memberTitle}</div>
-          </div>
-        }
-    </div>
+    <Box sx={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+      {/* <Box sx={{height:"20rem", border:"2px solid orange"}}> */}
+        <img src={image} alt="img" style={{height:"20rem"}}/>
+      {/* </Box> */}
+        
+      {!onlyImage && 
+        <div className="nameAndTitle">
+          <div className="memberName">{member.memberName}</div>
+          <div className="memberTitle">{member.memberTitle}</div>
+        </div>
+      }
+    </Box>
   )
 }
 
