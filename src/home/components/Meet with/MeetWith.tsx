@@ -3,8 +3,15 @@ import MeetPNG from '../../../assets/Meet_With.png';
 import meetDotPat from '../../../assets/Meet_Dot_Pattern.svg';
 import { MeetWithStyle } from '../../styles/HomeStyle';
 import Button from '../../../core/styles/Button';
+import { useNavigate } from 'react-router-dom';
 
 const MeetWith = () => {
+const navigate = useNavigate();
+
+const handleGetStarted = () => {
+  navigate("/contact");
+}
+
   return (
     <MeetWithStyle>
       <div className="MeetWithWrapper">
@@ -25,7 +32,7 @@ const MeetWith = () => {
           <br /> Whether you need agile design updates or continuous project management, we adapt to your needs with flexibility and professionalism. 
           </p>
           <div>
-            <Button>Get Started for Free</Button>
+            <Button onClick={handleGetStarted}>Get Started for Free</Button>
           </div>
           <p className="meetSecondP">
           "Outsourcing has become a game-changer for businesses globally. If you've been considering leveraging it, now’s the perfect time to dive in."

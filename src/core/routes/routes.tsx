@@ -15,7 +15,6 @@ import DashboardRolesComponent from "../../admin-dashboard/components/AdminDashb
 import SettingsComponent from "../../admin-dashboard/components/SettingsComponent";
 import { DashboardMenu } from "../../admin-dashboard/types/dashboard.types";
 import RoleDetails from "../../roles/components/RoleDetails";
-import TeamPage from "../../team/components/TeamPage";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +39,7 @@ const router = createBrowserRouter([
                   { path: ':roleId', element: <RoleDetails /> },
                 ]
               },
-              {path:'team', element:<TeamPage/>}
+              // {path:'team', element:<TeamPage/>}
             ],
           },
           
