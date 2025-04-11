@@ -34,8 +34,8 @@ const Header = () => {
       </div>
       <Box className="headerTitle">
         <h2>
-          Product design, <br />
-          <span> Mobile and Web apps </span>
+          Web Services <br />
+          <span> for modern platforms </span>
         </h2>
       </Box>
       <div className="waveSVG">
