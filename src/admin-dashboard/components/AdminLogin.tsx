@@ -32,7 +32,7 @@ const AdminLogin = () => {
 
       if (response.status === 200) {
         const { token, user } = response.data;
-        localStorage.setItem('token', token);
+        localStorage.setItem(getVariable('TOKEN_KEY'), token);
         dispatch(setIsAuthenticated(true));
         dispatch(setUser(user));
         dispatch(setSnackbar({ type: 'success', message: 'logged in successfully' }));
